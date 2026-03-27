@@ -1,0 +1,28 @@
+const CACHE_NAME = 'notations-techniques';
+const urlsToCache = [
+  './',
+  './index.html',
+  './manifest.json',
+  './icon-512.png'
+];
+
+// Installation du Service Worker (Mise en cache des fichiers)
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => {
+        return cache.addAll(urlsToCache);
+      })
+  );
+});
+
+// Interception des requêtes (Permet le fonctionnement hors-ligne)
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request)
+      .then(response => {
+        // Retourne la version en cache si elle existe, sinon fait la requête réseau
+        return response || fetch(event.request);
+      })
+  );
+});
