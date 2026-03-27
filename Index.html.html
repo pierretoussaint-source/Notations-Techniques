@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0.3">
+    <title>Notations Techniques</title>
+    <meta name="theme-color" content="#E67E22">
+    <link rel="icon" href="data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23E3F2FD' stroke='%233498DB' stroke-width='2'/%3E%3Cpath d='M 50 10 A 20 40 0 0 0 50 90 A 20 40 0 0 0 50 10' fill='none' stroke='%233498DB' stroke-width='1.5' opacity='0.6'/%3E%3Cpath d='M 10 50 A 40 20 0 0 0 90 50 A 40 20 0 0 0 10 50' fill='none' stroke='%233498DB' stroke-width='1.5' opacity='0.6'/%3E%3Cg fill='%23F1C40F' stroke='%23E67E22' stroke-width='1'%3E%3Cellipse cx='50' cy='25' rx='6' ry='15' /%3E%3Cellipse cx='50' cy='75' rx='6' ry='15' /%3E%3Cellipse cx='25' cy='50' rx='15' ry='6' /%3E%3Cellipse cx='75' cy='50' rx='15' ry='6' /%3E%3Cellipse cx='32' cy='32' rx='15' ry='6' transform='rotate(45 32 32)' /%3E%3Cellipse cx='68' cy='68' rx='15' ry='6' transform='rotate(45 68 68)' /%3E%3Cellipse cx='32' cy='68' rx='15' ry='6' transform='rotate(-45 32 68)' /%3E%3Cellipse cx='68' cy='32' rx='15' ry='6' transform='rotate(-45 68 32)' /%3E%3C/g%3E%3Ccircle cx='50' cy='50' r='12' fill='%235D4037' /%3E%3Ccircle cx='50' cy='50' r='10' fill='%234E342E' stroke='%233E2723' stroke-width='1' stroke-dasharray='2,2'/%3E%3C/svg%3E">
+    <style>
+        html { zoom: 0.8; }
+        :root {
+            /* Palette Tournesol */
+            --theme-primary-color: #E67E22; /* Orange chaleureux */
+            --theme-secondary-color: #5D4037; /* Marron Terre */
+            --theme-text-on-primary: white; 
+            --theme-text-on-secondary: white;
+            --theme-heading-color: #D35400; /* Orange foncé */
+            --theme-button-hover-bg: #D35400;
+            --theme-tab-active-bg: #E67E22; 
+            --theme-tab-active-text: white;
+            --theme-input-border-color: #ced4da; 
+            --theme-text-color: #495057; 
+            --theme-background-color: #f8f9fa;
+            --theme-card-background-color: #ffffff; 
+            --theme-card-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            --theme-font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body { font-family: var(--theme-font-family); margin: 0; padding: 15px; background-color: var(--theme-background-color); color: var(--theme-text-color); }
+        h1, h2, h3, h4 { color: var(--theme-heading-color); }
+        
+        .tabs { overflow: hidden; border-bottom: 1px solid #ddd; margin-bottom: 20px; display: flex; flex-wrap: wrap;}
+        .tablink { background-color: #e9ecef; border: none; outline: none; cursor: pointer; padding: 12px 15px; transition: 0.3s; font-size: 0.95em; border-radius: 6px 6px 0 0; margin-right: 3px; color: #495057; font-weight: 500; flex-grow: 1; text-align: center;}
+        .tablink.active { background-color: var(--theme-tab-active-bg); color: var(--theme-tab-active-text); font-weight: bold; }
+        .tabcontent { display: none; padding: 15px 0; }
+
+        #session-setup, .card-panel { padding: 20px; background-color: var(--theme-card-background-color); border-radius: 10px; box-shadow: var(--theme-card-shadow); margin-bottom:25px; }
+        #app-container { max-width: 1400px; margin: 0 auto; }
+        
+        label { display: block; margin-bottom: 6px; width: 100%; font-weight: bold; font-size: 0.95em; color: #343a40; }
+        input, select, textarea { padding: 12px; border: 1px solid var(--theme-input-border-color); border-radius: 5px; font-size: 1.1em; width: 100%; margin-bottom: 15px; box-sizing: border-box; }
+        input[type="checkbox"] { width: auto; transform: scale(1.5); margin: 10px; }
+
+        button { background-color: var(--theme-primary-color); color: var(--theme-text-on-primary); border: none; padding: 15px 20px; font-size: 1.1em; font-weight: bold; cursor: pointer; border-radius: 6px; transition: 0.2s; }
+        button:hover { background-color: var(--theme-button-hover-bg); transform: translateY(-1px); }
+        .btn-secondary { background-color: #6c757d; color: white; }
+        .btn-danger { background-color: #e74c3c; color: white; }
+        .btn-accent { background-color: var(--theme-secondary-color); color: var(--theme-text-on-secondary); }
+        .btn-info { background-color: #17a2b8; color: white; }
+
+        .notation-block { border: 2px solid #e9ecef; border-left: 5px solid var(--theme-secondary-color); padding: 15px; border-radius: 8px; margin-bottom: 15px; background: #fdfdfd; }
+        .notation-block.female { border-left-color: #e83e8c; background: #fff0f5; }
+        .notation-block.male { border-left-color: #3498db; background: #ebf5fb; }
+        
+        .block-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .block-header h4 { margin: 0; font-size: 1.2em; }
+
+        .photo-btn { font-size: 1.5em; padding: 10px 15px; border-radius: 8px; display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; background-color: #34495e; color: white;}
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; background: white; box-shadow: var(--theme-card-shadow); border-radius: 8px; overflow: hidden; }
+        th, td { border: 1px solid #dee2e6; padding: 12px; text-align: left; font-size: 0.9em; }
+        th { background-color: var(--theme-secondary-color); color: white; font-weight: bold; }
+        tr:nth-child(even) { background-color: #f8f9fa; }
+
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); }
+        .modal-content { background-color: #fefefe; margin: 5% auto; padding: 20px; border-radius: 8px; width: 90%; max-width: 600px; max-height: 90vh; overflow-y: auto; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        
+        .header-recap { background: var(--theme-secondary-color); color: white; padding: 15px; border-radius: 8px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;}
+        .header-recap h3 { margin: 0; color: white; font-size: 1.3em;}
+        .header-recap p { margin: 5px 0 0 0; opacity: 0.9; }
+
+        /* Animation */
+        .fade-in { animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+
+<body>
+
+    <div style="text-align: center; margin-bottom: 15px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <svg width="80" height="80" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <!-- Globe -->
+            <circle cx="50" cy="50" r="40" fill="#E3F2FD" stroke="#3498DB" stroke-width="2"/>
+            <path d="M 50 10 A 20 40 0 0 0 50 90 A 20 40 0 0 0 50 10" fill="none" stroke="#3498DB" stroke-width="1.5" opacity="0.6"/>
+            <path d="M 10 50 A 40 20 0 0 0 90 50 A 40 20 0 0 0 10 50" fill="none" stroke="#3498DB" stroke-width="1.5" opacity="0.6"/>
+            <!-- Tournesol -->
+            <g fill="#F1C40F" stroke="#E67E22" stroke-width="1">
+                <ellipse cx="50" cy="25" rx="6" ry="15" />
+                <ellipse cx="50" cy="75" rx="6" ry="15" />
+                <ellipse cx="25" cy="50" rx="15" ry="6" />
+                <ellipse cx="75" cy="50" rx="15" ry="6" />
+                <ellipse cx="32" cy="32" rx="15" ry="6" transform="rotate(45 32 32)" />
+                <ellipse cx="68" cy="68" rx="15" ry="6" transform="rotate(45 68 68)" />
+                <ellipse cx="32" cy="68" rx="15" ry="6" transform="rotate(-45 32 68)" />
+                <ellipse cx="68" cy="32" rx="15" ry="6" transform="rotate(-45 68 32)" />
+            </g>
+            <!-- Cœur du tournesol -->
+            <circle cx="50" cy="50" r="12" fill="#5D4037" />
+            <circle cx="50" cy="50" r="10" fill="#4E342E" stroke="#3E2723" stroke-width="1" stroke-dasharray="2,2"/>
+        </svg>
+        <h1 style="margin: 10px 0 0 0; font-size: 2.2em; color: var(--theme-heading-color);" data-i18n="title">Notations Techniques</h1>
+    </div>
+
+    <!-- ECRAN D'OUVERTURE / NAVIGATION -->
+    <div id="session-setup" class="fade-in">
+        <h2 style="margin-top:0;" data-i18n="config-session">Configuration de la session</h2>
+        
+        <label data-i18n="user">Utilisateur :</label>
+        <select id="setup-user">
+            <option value="" data-i18n="choisir">-- Choisir --</option>
+            <option value="Thibault">Thibault</option>
+            <option value="Clément">Clément</option>
+            <option value="Benoit">Benoit</option>
+        </select>
+
+        <label data-i18n="date">Date :</label>
+        <input type="date" id="setup-date">
+        
+        <hr style="border: 1px solid #eee; margin: 20px 0;">
+
+        <label data-i18n="country">Pays :</label>
+        <select id="setup-country" onchange="filterFarms()"><option value="" data-i18n="choisir">-- Choisir --</option></select>
+
+        <label data-i18n="farmer">Exploitant (Farmer) :</label>
+        <select id="setup-farmer" onchange="filterVarieties()" disabled><option value="" data-i18n="choisir">-- Choisir --</option></select>
+
+        <label data-i18n="variety">Variété :</label>
+        <select id="setup-variety" onchange="filterPlots()" disabled><option value="" data-i18n="choisir">-- Choisir --</option></select>
+
+        <label data-i18n="plot">Parcelle (Field_ID) :</label>
+        <select id="setup-plot" disabled><option value="" data-i18n="choisir">-- Choisir --</option></select>
+
+        <button id="btn-start" style="width: 100%; margin-top: 20px; font-size: 1.3em;" data-i18n="btn-start">Valider et Démarrer</button>
+    </div>
+
+    <!-- APPLICATION PRINCIPALE -->
+    <div id="app-container" style="display:none;">
+        <div class="tabs">
+            <button class="tablink active" onclick="openTab(event, 'Notations')" id="tab-btn-notations" data-i18n="tab-notations">Notations</button>
+            <button class="tablink" onclick="openTab(event, 'Recap')" data-i18n="tab-recap">Récap Jour</button>
+            <button class="tablink" onclick="openTab(event, 'AncienneVisite')" data-i18n="tab-ancienne">Ancienne Visite</button>
+            <button class="tablink" onclick="openTab(event, 'Navigation')" data-i18n="tab-nav">Navigation</button>
+        </div>
+
+        <!-- ONGLET 1 : NOTATIONS -->
+        <div id="Notations" class="tabcontent fade-in" style="display:block;">
+            <div class="header-recap">
+                <div>
+                    <h3 id="recap-title" data-i18n="recap-title-plot">Parcelle : -</h3>
+                    <p id="recap-subtitle">Pays - Exploitant - Variété</p>
+                </div>
+                <div style="display:flex; gap: 10px;">
+                    <button class="btn-info" onclick="openGps()" style="padding: 8px 15px; font-size:1em;">📍 GPS</button>
+                    <button class="btn-secondary" onclick="document.getElementById('stadesModal').style.display='block'" style="padding: 8px 15px; font-size:1em;" data-i18n="btn-stades">ℹ️ Stades</button>
+                </div>
+            </div>
+
+            <!-- NOUVEAUX BOUTONS PARENTS -->
+            <div class="card-panel" style="padding: 15px 20px;">
+                <label style="margin-bottom: 10px;" data-i18n="show-parents">Afficher les notations Parentales :</label>
+                <div style="display: flex; gap: 10px; width: 100%;">
+                    <button id="btn-show-m1" class="btn-secondary" style="flex:1; margin:0;" onclick="toggleParentBlock('m1')">♂️ M1</button>
+                    <button id="btn-show-m2" class="btn-secondary" style="flex:1; margin:0;" onclick="toggleParentBlock('m2')">♂️ M2</button>
+                    <button id="btn-show-f" class="btn-secondary" style="flex:1; margin:0;" onclick="toggleParentBlock('f')">♀️ F</button>
+                </div>
+            </div>
+
+            <!-- MALE 1 -->
+            <div id="block-m1" class="notation-block male fade-in" style="display:none;">
+                <div class="block-header">
+                    <h4>♂️ Mâle 1 (<span id="lbl-male1">-</span>)</h4>
+                </div>
+                <label data-i18n="stade">Stade :</label>
+                <select id="stade-m1" class="stade-select"><option value="">--</option></select>
+                <label data-i18n="commentaire">Commentaire :</label>
+                <input type="text" id="com-m1" placeholder="RAS..." data-i18n-placeholder="ras">
+                <button class="photo-btn" onclick="takePhoto('M1')">📷 <span data-i18n="photo">Photo</span> M1</button>
+                <input type="file" id="file-m1" accept="image/*" capture="environment" style="display:none;" onchange="handlePhoto(event, 'M1')">
+            </div>
+
+            <!-- MALE 2 -->
+            <div id="block-m2" class="notation-block male fade-in" style="display:none;">
+                <div class="block-header">
+                    <h4>♂️ Mâle 2 (<span id="lbl-male2">-</span>)</h4>
+                </div>
+                <label data-i18n="stade">Stade :</label>
+                <select id="stade-m2" class="stade-select"><option value="">--</option></select>
+                <label data-i18n="commentaire">Commentaire :</label>
+                <input type="text" id="com-m2" placeholder="RAS..." data-i18n-placeholder="ras">
+                <button class="photo-btn" onclick="takePhoto('M2')">📷 <span data-i18n="photo">Photo</span> M2</button>
+                <input type="file" id="file-m2" accept="image/*" capture="environment" style="display:none;" onchange="handlePhoto(event, 'M2')">
+            </div>
+
+            <!-- FEMELLE -->
+            <div id="block-f" class="notation-block female fade-in" style="display:none;">
+                <div class="block-header">
+                    <h4>♀️ Femelle (<span id="lbl-female">-</span>)</h4>
+                </div>
+                <label data-i18n="stade">Stade :</label>
+                <select id="stade-f" class="stade-select"><option value="">--</option></select>
+                <label data-i18n="commentaire">Commentaire :</label>
+                <input type="text" id="com-f" placeholder="RAS..." data-i18n-placeholder="ras">
+                <button class="photo-btn" onclick="takePhoto('F')">📷 <span data-i18n="photo">Photo</span> F</button>
+                <input type="file" id="file-f" accept="image/*" capture="environment" style="display:none;" onchange="handlePhoto(event, 'F')">
+            </div>
+
+            <!-- COMMENTAIRE PARCELLE (Toujours visible) -->
+            <div class="notation-block">
+                <h4 data-i18n="com-global">📝 Commentaire global parcelle</h4>
+                <textarea id="com-field" rows="3" placeholder="État général de la parcelle, adventices, etc..." data-i18n-placeholder="com-global-placeholder"></textarea>
+            </div>
+
+            <button onclick="saveNotation()" style="width: 100%; font-size: 1.5em; padding: 20px;" data-i18n="btn-save">✅ ENREGISTRER</button>
+        </div>
+
+        <!-- ONGLET 2 : RECAP JOUR -->
+        <div id="Recap" class="tabcontent fade-in">
+            <div class="card-panel">
+                <h3 data-i18n="saisies-jour">Saisies de la journée</h3>
+                <div style="overflow-x: auto;">
+                    <table id="table-recap">
+                        <thead>
+                            <tr>
+                                <th data-i18n="th-parc">Parcelle</th>
+                                <th>M1_Stade</th>
+                                <th>M1_Com</th>
+                                <th>M2_Stade</th>
+                                <th>M2_Com</th>
+                                <th>F_Stade</th>
+                                <th>F_Com</th>
+                                <th>Field_Com</th>
+                                <th data-i18n="th-photos">Photos</th>
+                                <th data-i18n="th-action">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ONGLET 3 : ANCIENNE VISITE -->
+        <div id="AncienneVisite" class="tabcontent fade-in">
+            <div class="card-panel">
+                <h3 data-i18n="charger-bdd">Charger une ancienne base de données</h3>
+                <input type="file" id="import-bdd" accept=".csv" style="border: 2px dashed var(--theme-secondary-color);">
+                <div style="overflow-x: auto; margin-top: 20px;">
+                    <table id="table-archive">
+                        <thead>
+                            <tr>
+                                <th data-i18n="th-date">Date</th>
+                                <th data-i18n="th-parc">Parcelle</th>
+                                <th>M1_Stade</th>
+                                <th>M1_Com</th>
+                                <th>M2_Stade</th>
+                                <th>M2_Com</th>
+                                <th>F_Stade</th>
+                                <th>F_Com</th>
+                                <th>Field_Com</th>
+                            </tr>
+                        </thead>
+                        <tbody><tr><td colspan="9" style="text-align:center; color:#888;" data-i18n="aucune-donnee">Aucune donnée chargée</td></tr></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ONGLET 4 : NAVIGATION / EXPORT -->
+        <div id="Navigation" class="tabcontent fade-in">
+            <div class="card-panel" style="text-align: center;">
+                <h3 data-i18n="nav-actions">Navigation & Actions</h3>
+                
+                <div style="margin-bottom: 20px; text-align: left;">
+                    <label data-i18n="langue">Langue / Language :</label>
+                    <select id="lang-select" onchange="applyTranslations(this.value)">
+                        <option value="fr">Français</option>
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="pl">Polski</option>
+                        <option value="ro">Română</option>
+                        <option value="uk">Українська</option>
+                    </select>
+                </div>
+
+                <button class="btn-accent" onclick="changeParcelle()" style="width: 100%; margin-bottom: 15px; font-size:1.2em;" data-i18n="btn-changer">🔄 Changer de Parcelle</button>
+                <button class="btn-primary" onclick="exportAndClear()" style="width: 100%; font-size:1.2em; background-color:#e67e22;" data-i18n="btn-export">📤 Exporter CSV (et purger)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL STADES -->
+    <div id="stadesModal" class="modal">
+        <div class="modal-content">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                <h2 style="margin:0;" data-i18n="codes-stades">Codes Stades</h2>
+                <button onclick="document.getElementById('stadesModal').style.display='none'" class="btn-danger" style="padding: 5px 15px; margin:0;">X</button>
+            </div>
+            <table id="table-stades-info">
+                <thead><tr><th data-i18n="stade">Stade</th><th data-i18n="code">Code</th></tr></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        /* =========================================
+           TRADUCTIONS
+           ========================================= */
+        const translations = {
+            fr: {
+                "title": "Notations Techniques", "config-session": "Configuration de la session", "user": "Utilisateur :", "choisir": "-- Choisir --",
+                "date": "Date :", "country": "Pays :", "farmer": "Exploitant (Farmer) :", "variety": "Variété :", "plot": "Parcelle (Field_ID) :",
+                "btn-start": "Valider et Démarrer", "tab-notations": "Notations", "tab-recap": "Récap Jour", "tab-ancienne": "Ancienne Visite", "tab-nav": "Navigation",
+                "recap-title-plot": "Parcelle : -", "btn-stades": "ℹ️ Stades", "show-parents": "Afficher les notations Parentales :",
+                "stade": "Stade :", "commentaire": "Commentaire :", "ras": "RAS...", "photo": "Photo", "com-global": "📝 Commentaire global parcelle",
+                "com-global-placeholder": "État général de la parcelle, adventices, etc...", "btn-save": "✅ ENREGISTRER",
+                "saisies-jour": "Saisies de la journée", "th-parc": "Parcelle", "th-photos": "Photos", "th-action": "Action",
+                "charger-bdd": "Charger une ancienne base de données", "th-date": "Date", "aucune-donnee": "Aucune donnée chargée",
+                "nav-actions": "Navigation & Actions", "langue": "Langue / Language :", "btn-changer": "🔄 Changer de Parcelle", "btn-export": "📤 Exporter CSV (et purger)",
+                "codes-stades": "Codes Stades", "code": "Code",
+                "alert-user-plot": "Veuillez sélectionner un Utilisateur et une Parcelle complète.", "alert-no-gps": "Aucune coordonnée GPS pour cette parcelle.",
+                "alert-save-success": "Enregistrement réussi !", "alert-delete": "Supprimer cette ligne ?", "alert-no-export": "Aucune donnée à exporter.",
+                "alert-export-success": "Le fichier a été téléchargé. Voulez-vous effacer les données de la tablette pour commencer une nouvelle session ?",
+                "alert-purged": "Données effacées.", "btn-edit": "Modifier", "btn-del": "Supprimer", "photo-taken": "✅ Photo prise ({n})"
+            },
+            en: {
+                "title": "Technical Notes", "config-session": "Session Setup", "user": "User:", "choisir": "-- Select --",
+                "date": "Date:", "country": "Country:", "farmer": "Farmer:", "variety": "Variety:", "plot": "Field_ID:",
+                "btn-start": "Confirm & Start", "tab-notations": "Notes", "tab-recap": "Daily Recap", "tab-ancienne": "Previous Visit", "tab-nav": "Navigation",
+                "recap-title-plot": "Field: -", "btn-stades": "ℹ️ Stages", "show-parents": "Show Parental notes:",
+                "stade": "Stage:", "commentaire": "Comment:", "ras": "Nothing to report...", "photo": "Photo", "com-global": "📝 Global field comment",
+                "com-global-placeholder": "General state of the field, weeds, etc...", "btn-save": "✅ SAVE",
+                "saisies-jour": "Today's records", "th-parc": "Field", "th-photos": "Photos", "th-action": "Action",
+                "charger-bdd": "Load previous database", "th-date": "Date", "aucune-donnee": "No data loaded",
+                "nav-actions": "Navigation & Actions", "langue": "Language:", "btn-changer": "🔄 Change Field", "btn-export": "📤 Export CSV (and clear)",
+                "codes-stades": "Stage Codes", "code": "Code",
+                "alert-user-plot": "Please select a User and a complete Field.", "alert-no-gps": "No GPS coordinates for this field.",
+                "alert-save-success": "Saved successfully!", "alert-delete": "Delete this row?", "alert-no-export": "No data to export.",
+                "alert-export-success": "File downloaded. Do you want to clear tablet data to start a new session?",
+                "alert-purged": "Data cleared.", "btn-edit": "Edit", "btn-del": "Delete", "photo-taken": "✅ Photo taken ({n})"
+            },
+            es: {
+                "title": "Notas Técnicas", "config-session": "Configuración de sesión", "user": "Usuario:", "choisir": "-- Elegir --",
+                "date": "Fecha:", "country": "País:", "farmer": "Agricultor:", "variety": "Variedad:", "plot": "Parcela (Field_ID):",
+                "btn-start": "Confirmar e Iniciar", "tab-notations": "Notas", "tab-recap": "Resumen", "tab-ancienne": "Visita anterior", "tab-nav": "Navegación",
+                "recap-title-plot": "Parcela: -", "btn-stades": "ℹ️ Estadios", "show-parents": "Mostrar notas parentales:",
+                "stade": "Estadio:", "commentaire": "Comentario:", "ras": "Nada que reportar...", "photo": "Foto", "com-global": "📝 Comentario global de parcela",
+                "com-global-placeholder": "Estado general, malezas, etc...", "btn-save": "✅ GUARDAR",
+                "saisies-jour": "Registros de hoy", "th-parc": "Parcela", "th-photos": "Fotos", "th-action": "Acción",
+                "charger-bdd": "Cargar base de datos anterior", "th-date": "Fecha", "aucune-donnee": "Sin datos",
+                "nav-actions": "Navegación y Acciones", "langue": "Idioma:", "btn-changer": "🔄 Cambiar Parcela", "btn-export": "📤 Exportar CSV (y borrar)",
+                "codes-stades": "Códigos de estadios", "code": "Código",
+                "alert-user-plot": "Por favor seleccione un Usuario y una Parcela completa.", "alert-no-gps": "Sin coordenadas GPS.",
+                "alert-save-success": "¡Guardado con éxito!", "alert-delete": "¿Borrar esta fila?", "alert-no-export": "Sin datos para exportar.",
+                "alert-export-success": "Archivo descargado. ¿Borrar datos de la tableta para iniciar nueva sesión?",
+                "alert-purged": "Datos borrados.", "btn-edit": "Editar", "btn-del": "Borrar", "photo-taken": "✅ Foto tomada ({n})"
+            },
+            pl: {
+                "title": "Notatki Techniczne", "config-session": "Konfiguracja sesji", "user": "Użytkownik:", "choisir": "-- Wybierz --",
+                "date": "Data:", "country": "Kraj:", "farmer": "Rolnik:", "variety": "Odmiana:", "plot": "Działka (Field_ID):",
+                "btn-start": "Zatwierdź i start", "tab-notations": "Notatki", "tab-recap": "Podsumowanie", "tab-ancienne": "Poprzednia wizyta", "tab-nav": "Nawigacja",
+                "recap-title-plot": "Działka: -", "btn-stades": "ℹ️ Fazy", "show-parents": "Pokaż notatki rodzicielskie:",
+                "stade": "Faza:", "commentaire": "Komentarz:", "ras": "Brak uwag...", "photo": "Zdjęcie", "com-global": "📝 Ogólny komentarz",
+                "com-global-placeholder": "Stan ogólny, chwasty, itp...", "btn-save": "✅ ZAPISZ",
+                "saisies-jour": "Dzisiejsze wpisy", "th-parc": "Działka", "th-photos": "Zdjęcia", "th-action": "Akcja",
+                "charger-bdd": "Załaduj poprzednią bazę", "th-date": "Data", "aucune-donnee": "Brak danych",
+                "nav-actions": "Nawigacja i Akcje", "langue": "Język:", "btn-changer": "🔄 Zmień działkę", "btn-export": "📤 Eksportuj CSV (i wyczyść)",
+                "codes-stades": "Kody Faz", "code": "Kod",
+                "alert-user-plot": "Wybierz Użytkownika i kompletną Działkę.", "alert-no-gps": "Brak współrzędnych GPS.",
+                "alert-save-success": "Zapisano pomyślnie!", "alert-delete": "Usunąć ten wiersz?", "alert-no-export": "Brak danych do eksportu.",
+                "alert-export-success": "Pobrano plik. Czy wyczyścić dane z tabletu, aby rozpocząć nową sesję?",
+                "alert-purged": "Dane wyczyszczone.", "btn-edit": "Edytuj", "btn-del": "Usuń", "photo-taken": "✅ Zdjęcie zrobione ({n})"
+            },
+            ro: {
+                "title": "Notații Tehnice", "config-session": "Configurare sesiune", "user": "Utilizator:", "choisir": "-- Alege --",
+                "date": "Data:", "country": "Țara:", "farmer": "Fermier:", "variety": "Soi:", "plot": "Parcela (Field_ID):",
+                "btn-start": "Confirmă și Începe", "tab-notations": "Notații", "tab-recap": "Rezumat", "tab-ancienne": "Vizita anterioară", "tab-nav": "Navigare",
+                "recap-title-plot": "Parcela: -", "btn-stades": "ℹ️ Stadii", "show-parents": "Afișează note parentale:",
+                "stade": "Stadiu:", "commentaire": "Comentariu:", "ras": "Nimic de raportat...", "photo": "Foto", "com-global": "📝 Comentariu global parcelă",
+                "com-global-placeholder": "Starea generală, buruieni, etc...", "btn-save": "✅ SALVEAZĂ",
+                "saisies-jour": "Înregistrările de azi", "th-parc": "Parcela", "th-photos": "Fotografii", "th-action": "Acțiune",
+                "charger-bdd": "Încarcă baza de date anterioară", "th-date": "Data", "aucune-donnee": "Nu există date",
+                "nav-actions": "Navigare & Acțiuni", "langue": "Limba:", "btn-changer": "🔄 Schimbă Parcela", "btn-export": "📤 Export CSV (și șterge)",
+                "codes-stades": "Coduri Stadii", "code": "Cod",
+                "alert-user-plot": "Vă rugăm să selectați un Utilizator și o Parcelă completă.", "alert-no-gps": "Fără coordonate GPS.",
+                "alert-save-success": "Salvat cu succes!", "alert-delete": "Ștergeți acest rând?", "alert-no-export": "Nu există date de exportat.",
+                "alert-export-success": "Fișier descărcat. Doriți să ștergeți datele de pe tabletă pentru o nouă sesiune?",
+                "alert-purged": "Date șterse.", "btn-edit": "Modifică", "btn-del": "Șterge", "photo-taken": "✅ Fotografie salvată ({n})"
+            },
+            uk: {
+                "title": "Технічні нотатки", "config-session": "Налаштування сесії", "user": "Користувач:", "choisir": "-- Вибрати --",
+                "date": "Дата:", "country": "Країна:", "farmer": "Фермер:", "variety": "Сорт:", "plot": "Ділянка (Field_ID):",
+                "btn-start": "Підтвердити і почати", "tab-notations": "Нотатки", "tab-recap": "Підсумки", "tab-ancienne": "Попередній візит", "tab-nav": "Навігація",
+                "recap-title-plot": "Ділянка: -", "btn-stades": "ℹ️ Стадії", "show-parents": "Показати батьківські нотатки:",
+                "stade": "Стадія:", "commentaire": "Коментар:", "ras": "Без зауважень...", "photo": "Фото", "com-global": "📝 Загальний коментар",
+                "com-global-placeholder": "Загальний стан, бур'яни, тощо...", "btn-save": "✅ ЗБЕРЕГТИ",
+                "saisies-jour": "Записи за сьогодні", "th-parc": "Ділянка", "th-photos": "Фото", "th-action": "Дія",
+                "charger-bdd": "Завантажити попередню базу", "th-date": "Дата", "aucune-donnee": "Немає даних",
+                "nav-actions": "Навігація та Дії", "langue": "Мова:", "btn-changer": "🔄 Змінити ділянку", "btn-export": "📤 Експорт CSV (і очистити)",
+                "codes-stades": "Коди стадій", "code": "Код",
+                "alert-user-plot": "Виберіть користувача та ділянку.", "alert-no-gps": "Немає GPS-координат.",
+                "alert-save-success": "Збережено успішно!", "alert-delete": "Видалити цей рядок?", "alert-no-export": "Немає даних для експорту.",
+                "alert-export-success": "Файл завантажено. Очистити дані планшета для нової сесії?",
+                "alert-purged": "Дані очищено.", "btn-edit": "Змінити", "btn-del": "Видалити", "photo-taken": "✅ Фото зроблено ({n})"
+            }
+        };
+
+        function getT(key) {
+            const lang = document.getElementById('lang-select') ? document.getElementById('lang-select').value : 'fr';
+            return translations[lang] && translations[lang][key] ? translations[lang][key] : key;
+        }
+
+        window.applyTranslations = function(lang) {
+            if(!translations[lang]) lang = 'fr';
+            document.querySelectorAll("[data-i18n]").forEach(el => {
+                const key = el.getAttribute("data-i18n");
+                if (translations[lang][key]) el.innerHTML = translations[lang][key];
+            });
+            document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+                const key = el.getAttribute("data-i18n-placeholder");
+                if (translations[lang][key]) el.placeholder = translations[lang][key];
+            });
+            localStorage.setItem('selected_lang', lang);
+            
+            // Refreshes for dynamic alerts/buttons if necessary
+            document.querySelectorAll('.photo-btn').forEach(btn => {
+                if(!btn.innerHTML.includes('✅')) {
+                    const type = btn.getAttribute('onclick').match(/'([^']+)'/)[1]; // Extract 'M1', 'M2', 'F'
+                    btn.innerHTML = `📷 ${getT('photo')} ${type}`;
+                }
+            });
+        };
+
+        /* =========================================
+           BASES DE DONNÉES (Fixes via CSV fournis)
+           ========================================= */
+        const rawStades = `Stade,Code_Stade
+Semis,S
+Germination,GERMI
+Prélevée (germe 4 cm),G4CM
+Début levée (5% cotylédons visibles),5%L
+50% levée (50% cotylédons visibles),50%L
+100% levée (100% cotylédons visibles),100%L
+1ère paire de feuilles,1PF
+2ème paire de feuilles,2PF
+3ème paire de feuilles,3PF
+4ème paire de feuilles,4PF
+5ème paire de feuilles,5PF
+6ème paire de feuilles,6PF
+Limite passage tracteur,LPT
+E1 : Bouton étoilé,E1
+E2,E2
+E3,E3
+E4,E4
+E5,E5
+Début floraison,FLO10
+50% floraison,FLO50
+Fin floraison,FFLO
+Maturité,MAT
+Récolte,REC`;
+
+        const rawParcelles = `Country,Field_ID,Position GPS,Farmer,Variety,Female,Male
+France,1,"47.1245, 2.5874",Jean,5053 SU,F19002MJS/A,R8035M1JS
+Roumanie,2,"45.9120, 25.1040",Jean,5053 SU,F19002MJS/A,R8035M1JS
+Ukraine,3,"49.3250, 31.4820",Jean,5053 SU,F19002MJS/A,R8035M1JS
+USA,4,"39.5200, -104.8500",John,5053 SU,F19002MJS/A,R8035M1JS
+Espagne,5,"40.2150, -3.7220",John,5053 SU,F19002MJS/A,R8035M1JS
+Kazakhstan,6,"48.0196, 66.9237",John,5053 SU,F19002MJS/A,R8035M1JS
+France,7,"47.1245, 2.5874",Marc,5053 SU,F19002MJS/A,R8035M1JS
+Roumanie,8,"45.9120, 25.1040",Marc,5053 SU,F19002MJS/A,R8035M1JS
+Ukraine,9,"49.3250, 31.4820",Marc,5053 SU,F19002MJS/A,R8035M1JS
+USA,10,"39.5200, -104.8500",Marc,5053 SU,F19002MJS/A,R8035M1JS
+Espagne,11,"40.2150, -3.7220",Marc,5054 SU,F19002MJS/A,R8035M1JS
+Kazakhstan,12,"48.0196, 66.9237",Marc,ES IDILLIC,F7AZ4MO/A,V7506RO
+France,13,"47.1245, 2.5874",Jean,ES IDILLIC,F7AZ4MO/A,V7506RO
+Roumanie,14,"45.9120, 25.1040",Jean,ES IDILLIC,F7AZ4MO/A,V7506RO
+Ukraine,15,"49.3250, 31.4820",Jean,ES IDILLIC,F7AZ4MO/A,V7506RO
+USA,16,"39.5200, -104.8500",Jean,ES IDILLIC,F7AZ4MO/A,V7506RO
+Espagne,17,"40.2150, -3.7220",John,ES IDILLIC,F7AZ4MO/A,V7506RO
+Kazakhstan,18,"48.0196, 66.9237",John,ES IDILLIC,F7AZ4MO/A,V7506RO`;
+
+        // Parseur CSV robuste avec nettoyage du BOM (ï»¿)
+        function parseCSV(csvString) {
+            // Retire le BOM s'il existe au tout début de la chaine
+            csvString = csvString.replace(/^\uFEFF/, '');
+            const lines = csvString.trim().split(/\r?\n/);
+            if (lines.length < 2) return [];
+            
+            let sep = lines[0].indexOf(';') > -1 ? ';' : ',';
+            const regex = new RegExp(`${sep}(?=(?:(?:[^"]*"){2})*[^"]*$)`);
+            
+            const cleanVal = (val) => {
+                if (!val) return "";
+                val = val.trim();
+                if (val.startsWith('"') && val.endsWith('"')) val = val.substring(1, val.length - 1);
+                return val;
+            };
+            
+            const headers = lines[0].split(regex).map(cleanVal);
+            const objects = [];
+            
+            for (let i = 1; i < lines.length; i++) {
+                const currentline = lines[i].split(regex);
+                if(currentline.length >= 1 && lines[i].trim() !== "") {
+                    const obj = {};
+                    headers.forEach((h, idx) => { obj[h] = cleanVal(currentline[idx]); });
+                    objects.push(obj);
+                }
+            }
+            return objects;
+        }
+
+        const bddStades = parseCSV(rawStades);
+        const bddParcelles = parseCSV(rawParcelles);
+        
+        let observations = JSON.parse(localStorage.getItem('prod_obs_v1') || "[]");
+        let currentPlotData = null;
+        let currentPhotos = [];
+        let photoCounters = { M1: 1, M2: 1, F: 1 };
+        let visibleParents = { m1: false, m2: false, f: false };
+
+        /* =========================================
+           INITIALISATION ET LOGIQUE DE NAVIGATION
+           ========================================= */
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('selected_lang') || 'fr';
+            const langSelect = document.getElementById('lang-select');
+            if (langSelect) langSelect.value = savedLang;
+            
+            document.getElementById('setup-date').valueAsDate = new Date();
+            initStadesDropdowns();
+            initCascadingSelects();
+            restoreSetupChoices();
+            renderRecapTable();
+            
+            applyTranslations(savedLang);
+        });
+
+        function openTab(evt, tabName) {
+            document.querySelectorAll('.tabcontent').forEach(tab => tab.style.display = 'none');
+            document.querySelectorAll('.tablink').forEach(link => link.classList.remove('active'));
+            document.getElementById(tabName).style.display = 'block';
+            evt.currentTarget.classList.add('active');
+        }
+
+        function initStadesDropdowns() {
+            // Remplir les listes déroulantes de la page : Seulement le CODE_STADE
+            const selects = document.querySelectorAll('.stade-select');
+            let options = '<option value="">--</option>';
+            bddStades.forEach(s => {
+                options += `<option value="${s.Code_Stade}">${s.Code_Stade}</option>`;
+            });
+            selects.forEach(sel => sel.innerHTML = options);
+
+            // Remplir le tableau d'info de la modale cu toutes les infos
+            const tbody = document.querySelector('#table-stades-info tbody');
+            tbody.innerHTML = bddStades.map(s => `<tr><td>${s.Stade}</td><td><strong>${s.Code_Stade}</strong></td></tr>`).join('');
+        }
+
+        /* --- Logique des listes déroulantes en cascade --- */
+        function getUnique(key, filterFn = () => true) {
+            return [...new Set(bddParcelles.filter(filterFn).map(item => item[key]))].sort();
+        }
+        function populateSelect(id, array, resetVal) {
+            const sel = document.getElementById(id);
+            sel.innerHTML = `<option value="">${resetVal}</option>` + array.map(x => `<option value="${x}">${x}</option>`).join('');
+            sel.disabled = array.length === 0;
+        }
+
+        function initCascadingSelects() {
+            populateSelect('setup-country', getUnique('Country'), getT('choisir'));
+        }
+
+        window.filterFarms = () => {
+            const c = document.getElementById('setup-country').value;
+            populateSelect('setup-farmer', getUnique('Farmer', p => p.Country === c), getT('choisir'));
+            document.getElementById('setup-variety').innerHTML = `<option value="">${getT('choisir')}</option>`;
+            document.getElementById('setup-variety').disabled = true;
+            document.getElementById('setup-plot').innerHTML = `<option value="">${getT('choisir')}</option>`;
+            document.getElementById('setup-plot').disabled = true;
+        };
+
+        window.filterVarieties = () => {
+            const c = document.getElementById('setup-country').value;
+            const f = document.getElementById('setup-farmer').value;
+            populateSelect('setup-variety', getUnique('Variety', p => p.Country === c && p.Farmer === f), getT('choisir'));
+            document.getElementById('setup-plot').innerHTML = `<option value="">${getT('choisir')}</option>`;
+            document.getElementById('setup-plot').disabled = true;
+        };
+
+        window.filterPlots = () => {
+            const c = document.getElementById('setup-country').value;
+            const f = document.getElementById('setup-farmer').value;
+            const v = document.getElementById('setup-variety').value;
+            populateSelect('setup-plot', getUnique('Field_ID', p => p.Country === c && p.Farmer === f && p.Variety === v), getT('choisir'));
+        };
+
+        /* --- Restauration des choix précédents --- */
+        function restoreSetupChoices() {
+            const savedUser = localStorage.getItem('prod_setup_user');
+            if(savedUser) document.getElementById('setup-user').value = savedUser;
+
+            const savedCountry = localStorage.getItem('prod_setup_country');
+            if(savedCountry) {
+                document.getElementById('setup-country').value = savedCountry;
+                filterFarms();
+                const savedFarmer = localStorage.getItem('prod_setup_farmer');
+                if(savedFarmer) {
+                    document.getElementById('setup-farmer').value = savedFarmer;
+                    filterVarieties();
+                    const savedVariety = localStorage.getItem('prod_setup_variety');
+                    if(savedVariety) {
+                        document.getElementById('setup-variety').value = savedVariety;
+                        filterPlots();
+                    }
+                }
+            }
+        }
+
+        /* --- Démarrage de la saisie --- */
+        document.getElementById('btn-start').onclick = () => {
+            const user = document.getElementById('setup-user').value;
+            const country = document.getElementById('setup-country').value;
+            const farmer = document.getElementById('setup-farmer').value;
+            const variety = document.getElementById('setup-variety').value;
+            const plotId = document.getElementById('setup-plot').value;
+            
+            if(!user || !plotId) {
+                return alert(getT('alert-user-plot'));
+            }
+
+            // Sauvegarde des choix en LocalStorage
+            localStorage.setItem('prod_setup_user', user);
+            localStorage.setItem('prod_setup_country', country);
+            localStorage.setItem('prod_setup_farmer', farmer);
+            localStorage.setItem('prod_setup_variety', variety);
+
+            // Récupérer la ligne de la parcelle
+            currentPlotData = bddParcelles.find(p => p.Field_ID === plotId);
+            
+            // Mettre à jour l'entête
+            document.getElementById('recap-title').textContent = `${getT('th-parc')} : ${currentPlotData.Field_ID}`;
+            document.getElementById('recap-subtitle').textContent = `${currentPlotData.Country} - ${currentPlotData.Farmer} - ${currentPlotData.Variety}`;
+            
+            // Mettre à jour les labels de génétique
+            document.getElementById('lbl-female').textContent = currentPlotData.Female || "Inconnu";
+            // Le CSV fourni n'a qu'un "Male". On l'applique à M1 et M2.
+            document.getElementById('lbl-male1').textContent = currentPlotData.Male || "Inconnu";
+            document.getElementById('lbl-male2').textContent = currentPlotData.Male || "Inconnu";
+
+            // Reset Form & Photos
+            resetForm();
+
+            // Basculer l'affichage
+            document.getElementById('session-setup').style.display = 'none';
+            document.getElementById('app-container').style.display = 'block';
+            document.getElementById('tab-btn-notations').click();
+        };
+
+        window.changeParcelle = () => {
+            document.getElementById('app-container').style.display = 'none';
+            document.getElementById('session-setup').style.display = 'block';
+            document.getElementById('setup-plot').value = ""; // On force juste à rechoisir la parcelle
+        };
+
+        /* --- Affichage des blocs Parentaux (Boutons individuels) --- */
+        window.toggleParentBlock = (type) => {
+            visibleParents[type] = !visibleParents[type];
+            const btn = document.getElementById('btn-show-' + type);
+            const block = document.getElementById('block-' + type);
+            
+            if (visibleParents[type]) {
+                btn.classList.remove('btn-secondary');
+                btn.style.backgroundColor = type === 'f' ? '#e83e8c' : '#3498db';
+                block.style.display = 'block';
+            } else {
+                btn.classList.add('btn-secondary');
+                btn.style.backgroundColor = '';
+                block.style.display = 'none';
+            }
+        };
+
+        window.openGps = () => {
+            if(currentPlotData && currentPlotData['Position GPS']) {
+                window.open(`https://www.google.com/maps/search/?api=1&query=${currentPlotData['Position GPS'].replace(/\s/g,'')}`, '_blank');
+            } else {
+                alert(getT('alert-no-gps'));
+            }
+        };
+
+        /* =========================================
+           GESTION DES PHOTOS
+           ========================================= */
+        window.takePhoto = (type) => {
+            // L'attribut capture="environment" force le smartphone à ouvrir l'appareil photo
+            document.getElementById('file-' + type.toLowerCase()).click();
+        };
+
+        window.handlePhoto = (event, type) => {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const dateStr = document.getElementById('setup-date').value.replace(/-/g, ''); // 20260309
+            const plotId = currentPlotData.Field_ID;
+            const counter = photoCounters[type];
+            
+            // Format : 1_20260309_M1_1.jpg (FieldID_Date_Type_Counter)
+            const baseName = `${plotId}_${dateStr}_${type}_${counter}`;
+            const filename = `${baseName}.jpg`;
+
+            // Téléchargement factice (pour sauvegarder localement sur l'appareil)
+            const blobUrl = URL.createObjectURL(file);
+            const link = document.createElement("a");
+            link.href = blobUrl;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Stocker le nom de la photo pour l'export CSV
+            currentPhotos.push(baseName);
+            
+            // Incrémenter le compteur
+            photoCounters[type]++;
+
+            // Confirmer visuellement sur le bouton
+            const btn = document.querySelector(`.notation-block.${type === 'F' ? 'female' : 'male'} .photo-btn`);
+            btn.innerHTML = getT('photo-taken').replace('{n}', counter);
+            btn.style.backgroundColor = "var(--theme-primary-color)";
+            setTimeout(() => {
+                btn.innerHTML = `📷 ${getT('photo')} ${type}`;
+                btn.style.backgroundColor = "#34495e";
+            }, 2000);
+        };
+
+        /* =========================================
+           ENREGISTREMENT ET TABLEAUX
+           ========================================= */
+        function resetForm() {
+            document.querySelectorAll('.stade-select').forEach(el => el.value = "");
+            document.getElementById('com-m1').value = "";
+            document.getElementById('com-m2').value = "";
+            document.getElementById('com-f').value = "";
+            document.getElementById('com-field').value = "";
+            currentPhotos = [];
+            photoCounters = { M1: 1, M2: 1, F: 1 };
+            
+            // Masquer les blocs de parents par défaut à chaque nouvelle parcelle
+            ['m1', 'm2', 'f'].forEach(t => {
+                visibleParents[t] = false;
+                const btn = document.getElementById('btn-show-' + t);
+                if(btn) {
+                    btn.classList.add('btn-secondary');
+                    btn.style.backgroundColor = '';
+                }
+                const block = document.getElementById('block-' + t);
+                if(block) block.style.display = 'none';
+            });
+        }
+
+        window.saveNotation = () => {
+            const obs = {
+                id: Date.now(),
+                Year: document.getElementById('setup-date').value.split('-')[0],
+                Country: currentPlotData.Country,
+                Field_ID: currentPlotData.Field_ID,
+                Farmer: currentPlotData.Farmer,
+                Variety: currentPlotData.Variety,
+                Female: currentPlotData.Female,
+                Male: currentPlotData.Male,
+                User: document.getElementById('setup-user').value,
+                Date_obs: document.getElementById('setup-date').value,
+                Stage_F: document.getElementById('stade-f').value,
+                Stage_M1: document.getElementById('stade-m1').value,
+                Stage_M2: document.getElementById('stade-m2').value,
+                Com_F: document.getElementById('com-f').value,
+                Com_M1: document.getElementById('com-m1').value,
+                Com_M2: document.getElementById('com-m2').value,
+                Com_Field: document.getElementById('com-field').value,
+                Photos: [...currentPhotos] // Copie de l'array
+            };
+
+            // Ajouter les colonnes Pict_1 à Pict_11
+            for(let i=1; i<=11; i++) {
+                obs[`Pict_${i}`] = obs.Photos[i-1] || "";
+            }
+
+            observations.unshift(obs);
+            localStorage.setItem('prod_obs_v1', JSON.stringify(observations));
+            renderRecapTable();
+            
+            alert(getT('alert-save-success'));
+            changeParcelle(); // Retour automatique à l'écran de choix
+        };
+
+        function renderRecapTable() {
+            const tbody = document.querySelector('#table-recap tbody');
+            tbody.innerHTML = observations.map(o => `
+                <tr>
+                    <td><strong>P${o.Field_ID}</strong><br><span style="font-size:0.8em;color:#666;">${o.Variety}</span></td>
+                    <td>${o.Stage_M1}</td><td>${o.Com_M1}</td>
+                    <td>${o.Stage_M2}</td><td>${o.Com_M2}</td>
+                    <td>${o.Stage_F}</td><td>${o.Com_F}</td>
+                    <td>${o.Com_Field}</td>
+                    <td>${o.Photos.length} 📷</td>
+                    <td>
+                        <button class="btn-info" style="padding:5px 10px; font-size:0.9em; margin-bottom:5px;" onclick="editObs(${o.id})">${getT('btn-edit')}</button>
+                        <button class="btn-danger" style="padding:5px 10px; font-size:0.9em;" onclick="delObs(${o.id})">${getT('btn-del')}</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        window.delObs = (id) => {
+            if(confirm(getT('alert-delete'))) {
+                observations = observations.filter(o => o.id !== id);
+                localStorage.setItem('prod_obs_v1', JSON.stringify(observations));
+                renderRecapTable();
+            }
+        };
+
+        window.editObs = (id) => {
+            const obsToEdit = observations.find(o => o.id === id);
+            if(!obsToEdit) return;
+
+            // Replacer le contexte 
+            document.getElementById('setup-country').value = obsToEdit.Country;
+            filterFarms();
+            document.getElementById('setup-farmer').value = obsToEdit.Farmer;
+            filterVarieties();
+            document.getElementById('setup-variety').value = obsToEdit.Variety;
+            filterPlots();
+            document.getElementById('setup-plot').value = obsToEdit.Field_ID;
+            
+            // Re-valider pour ouvrir la session
+            document.getElementById('btn-start').click();
+
+            // Ouvrir les blocs si besoin
+            ['m1', 'm2', 'f'].forEach(t => {
+                if (obsToEdit[`Stage_${t.toUpperCase()}`] || obsToEdit[`Com_${t.toUpperCase()}`]) {
+                    toggleParentBlock(t);
+                }
+            });
+
+            // Remplir les champs
+            document.getElementById('stade-f').value = obsToEdit.Stage_F;
+            document.getElementById('stade-m1').value = obsToEdit.Stage_M1;
+            document.getElementById('stade-m2').value = obsToEdit.Stage_M2;
+            document.getElementById('com-f').value = obsToEdit.Com_F;
+            document.getElementById('com-m1').value = obsToEdit.Com_M1;
+            document.getElementById('com-m2').value = obsToEdit.Com_M2;
+            document.getElementById('com-field').value = obsToEdit.Com_Field;
+            currentPhotos = [...obsToEdit.Photos];
+
+            // Supprimer l'ancienne
+            observations = observations.filter(o => o.id !== id);
+            localStorage.setItem('prod_obs_v1', JSON.stringify(observations));
+            renderRecapTable();
+        };
+
+        /* =========================================
+           IMPORT ANCIENNE VISITE & EXPORT CSV
+           ========================================= */
+        document.getElementById('import-bdd').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                const data = parseCSV(evt.target.result);
+                if (data.length > 0) {
+                    const tbody = document.querySelector('#table-archive tbody');
+                    tbody.innerHTML = data.map(o => `
+                        <tr>
+                            <td>${o.Date_obs || '-'}</td>
+                            <td><strong>P${o.Field_ID}</strong><br><span style="font-size:0.8em;color:#666;">${o.Variety}</span></td>
+                            <td>${o.Stage_M1 || '-'}</td><td>${o.Com_M1 || '-'}</td>
+                            <td>${o.Stage_M2 || '-'}</td><td>${o.Com_M2 || '-'}</td>
+                            <td>${o.Stage_F || '-'}</td><td>${o.Com_F || '-'}</td>
+                            <td>${o.Com_Field || '-'}</td>
+                        </tr>
+                    `).join('');
+                }
+            };
+            reader.readAsText(file);
+        });
+
+        window.exportAndClear = () => {
+            if(observations.length === 0) return alert(getT('alert-no-export'));
+            
+            const cols = ["Year","Country","Field_ID","Farmer","Variety","Female","Male","User","Date_obs","Stage_F","Stage_M1","Stage_M2","Com_F","Com_M1","Com_M2","Com_Field","Pict_1","Pict_2","Pict_3","Pict_4","Pict_5","Pict_6","Pict_7","Pict_8","Pict_9","Pict_10","Pict_11"];
+            
+            let csv = cols.join(",") + "\n";
+            observations.forEach(o => {
+                csv += cols.map(c => {
+                    let val = o[c] || "";
+                    // Échapper les guillemets et virgules pour un CSV propre
+                    if(val.includes(',')) val = `"${val}"`;
+                    return val;
+                }).join(",") + "\n";
+            });
+
+            const dateStr = document.getElementById('setup-date').value;
+            const filename = `Export_${dateStr}.csv`;
+            
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'}));
+            a.download = filename;
+            a.click();
+
+            if(confirm(getT('alert-export-success'))) {
+                observations = [];
+                localStorage.removeItem('prod_obs_v1');
+                renderRecapTable();
+                alert(getT('alert-purged'));
+            }
+        };
+
+    </script>
+</body>
+</html>
