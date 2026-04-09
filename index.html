@@ -55,6 +55,8 @@
         .btn-danger { background-color: #e74c3c; color: white; }
         .btn-accent { background-color: var(--theme-secondary-color); color: var(--theme-text-on-secondary); }
         .btn-info { background-color: #17a2b8; color: white; }
+        .btn-share { background-color: #27ae60; color: white; }
+        .btn-drive { background-color: #2980b9; color: white; }
 
         .notation-block { border: 2px solid #e9ecef; border-left: 5px solid var(--theme-secondary-color); padding: 15px; border-radius: 8px; margin-bottom: 15px; background: #fdfdfd; }
         .notation-block.female { border-left-color: #e83e8c; background: #fff0f5; }
@@ -106,47 +108,8 @@
         <h1 style="margin: 10px 0 0 0; font-size: 2.2em; color: var(--theme-heading-color);" data-i18n="title">Notations Techniques</h1>
     </div>
 
-    <!-- ECRAN D'OUVERTURE / NAVIGATION -->
-    <div id="session-setup" class="fade-in">
-        <h2 style="margin-top:0;" data-i18n="config-session">Configuration de la session</h2>
-        
-        <!-- NOUVEAU : CHARGEMENT BDD -->
-        <div style="background-color: #eef2f3; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px dashed #ccc;">
-            <label data-i18n="load-bdd-parcelles">📂 Charger la BDD Parcelles (Format CSV) :</label>
-            <p style="font-size: 0.85em; color: #555; margin-top: 0;" data-i18n="bdd-info">Ce fichier restera en mémoire dans l'application pour les prochaines fois.</p>
-            <input type="file" id="import-bdd-parcelles" accept=".csv" style="background: white;">
-        </div>
-
-        <label data-i18n="user">Utilisateur :</label>
-        <select id="setup-user">
-            <option value="" data-i18n="choisir">-- Choisir --</option>
-            <option value="Thibault">Thibault</option>
-            <option value="Clément">Clément</option>
-            <option value="Benoit">Benoit</option>
-        </select>
-
-        <label data-i18n="date">Date :</label>
-        <input type="date" id="setup-date">
-        
-        <hr style="border: 1px solid #eee; margin: 20px 0;">
-
-        <label data-i18n="country">Pays :</label>
-        <select id="setup-country" onchange="filterFarms()"><option value="" data-i18n="choisir">-- Choisir --</option></select>
-
-        <label data-i18n="farmer">Exploitant (Farmer) :</label>
-        <select id="setup-farmer" onchange="filterVarieties()" disabled><option value="" data-i18n="choisir">-- Choisir --</option></select>
-
-        <label data-i18n="variety">Variété :</label>
-        <select id="setup-variety" onchange="filterPlots()" disabled><option value="" data-i18n="choisir">-- Choisir --</option></select>
-
-        <label data-i18n="plot">Parcelle (Field_ID) :</label>
-        <select id="setup-plot" disabled><option value="" data-i18n="choisir">-- Choisir --</option></select>
-
-        <button id="btn-start" style="width: 100%; margin-top: 20px; font-size: 1.3em;" data-i18n="btn-start">Valider et Démarrer</button>
-    </div>
-
-    <!-- APPLICATION PRINCIPALE -->
-    <div id="app-container" style="display:none;">
+    <!-- APPLICATION PRINCIPALE (Toujours visible pour accéder aux autres onglets) -->
+    <div id="app-container">
         <div class="tabs">
             <button class="tablink active" onclick="openTab(event, 'Notations')" id="tab-btn-notations" data-i18n="tab-notations">Notations</button>
             <button class="tablink" onclick="openTab(event, 'Recap')" data-i18n="tab-recap">Récap Jour</button>
@@ -154,74 +117,116 @@
             <button class="tablink" onclick="openTab(event, 'Navigation')" data-i18n="tab-nav">Navigation</button>
         </div>
 
-        <!-- ONGLET 1 : NOTATIONS -->
+        <!-- ONGLET 1 : NOTATIONS (Contient la Config ET le Formulaire) -->
         <div id="Notations" class="tabcontent fade-in" style="display:block;">
-            <div class="header-recap">
-                <div>
-                    <h3 id="recap-title" data-i18n="recap-title-plot">Parcelle : -</h3>
-                    <p id="recap-subtitle">Pays - Exploitant - Variété</p>
+            
+            <!-- SOUS-PARTIE : CONFIGURATION -->
+            <div id="session-setup" class="card-panel">
+                <h2 style="margin-top:0;" data-i18n="config-session">Configuration de la session</h2>
+                
+                <div style="background-color: #eef2f3; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px dashed #ccc;">
+                    <label data-i18n="load-bdd-parcelles">📂 Charger la BDD Parcelles (Format CSV) :</label>
+                    <p style="font-size: 0.85em; color: #555; margin-top: 0;" data-i18n="bdd-info">Ce fichier restera en mémoire dans l'application pour les prochaines fois.</p>
+                    <input type="file" id="import-bdd-parcelles" accept=".csv" style="background: white;">
                 </div>
-                <div style="display:flex; gap: 10px;">
-                    <button class="btn-info" onclick="openGps()" style="padding: 8px 15px; font-size:1em;">📍 GPS</button>
-                    <button class="btn-secondary" onclick="document.getElementById('stadesModal').style.display='block'" style="padding: 8px 15px; font-size:1em;" data-i18n="btn-stades">ℹ️ Stades</button>
-                </div>
+
+                <label data-i18n="user">Utilisateur :</label>
+                <select id="setup-user">
+                    <option value="" data-i18n="choisir">-- Choisir --</option>
+                    <option value="Thibault">Thibault</option>
+                    <option value="Clément">Clément</option>
+                    <option value="Benoit">Benoit</option>
+                </select>
+
+                <label data-i18n="date">Date :</label>
+                <input type="date" id="setup-date">
+                
+                <hr style="border: 1px solid #eee; margin: 20px 0;">
+
+                <label data-i18n="country">Pays :</label>
+                <select id="setup-country" onchange="filterFarms()"><option value="" data-i18n="choisir">-- Choisir --</option></select>
+
+                <label data-i18n="farmer">Exploitant (Farmer) :</label>
+                <select id="setup-farmer" onchange="filterVarieties()" disabled><option value="" data-i18n="choisir">-- Choisir --</option></select>
+
+                <label data-i18n="variety">Variété :</label>
+                <select id="setup-variety" onchange="filterPlots()" disabled><option value="" data-i18n="choisir">-- Choisir --</option></select>
+
+                <label data-i18n="plot">Parcelle (Field_ID) :</label>
+                <select id="setup-plot" disabled><option value="" data-i18n="choisir">-- Choisir --</option></select>
+
+                <button id="btn-start" style="width: 100%; margin-top: 20px; font-size: 1.3em;" data-i18n="btn-start">Valider et Démarrer</button>
             </div>
 
-            <div class="card-panel" style="padding: 15px 20px;">
-                <label style="margin-bottom: 10px;" data-i18n="show-parents">Afficher les notations Parentales :</label>
-                <div style="display: flex; gap: 10px; width: 100%;">
-                    <button id="btn-show-m1" class="btn-secondary" style="flex:1; margin:0;" onclick="toggleParentBlock('m1')">♂️ M1</button>
-                    <button id="btn-show-m2" class="btn-secondary" style="flex:1; margin:0;" onclick="toggleParentBlock('m2')">♂️ M2</button>
-                    <button id="btn-show-f" class="btn-secondary" style="flex:1; margin:0;" onclick="toggleParentBlock('f')">♀️ F</button>
+            <!-- SOUS-PARTIE : FORMULAIRE DE SAISIE (Caché au départ) -->
+            <div id="notation-form" style="display:none;">
+                <div class="header-recap">
+                    <div>
+                        <h3 id="recap-title" data-i18n="recap-title-plot">Parcelle : -</h3>
+                        <p id="recap-subtitle">Pays - Exploitant - Variété</p>
+                    </div>
+                    <div style="display:flex; gap: 10px;">
+                        <button class="btn-info" onclick="openGps()" style="padding: 8px 15px; font-size:1em;">📍 GPS</button>
+                        <button class="btn-secondary" onclick="document.getElementById('stadesModal').style.display='block'" style="padding: 8px 15px; font-size:1em;" data-i18n="btn-stades">ℹ️ Stades</button>
+                    </div>
                 </div>
-            </div>
 
-            <!-- MALE 1 -->
-            <div id="block-m1" class="notation-block male fade-in" style="display:none;">
-                <div class="block-header">
-                    <h4>♂️ Mâle 1 (<span id="lbl-male1">-</span>)</h4>
+                <div class="card-panel" style="padding: 15px 20px;">
+                    <label style="margin-bottom: 10px;" data-i18n="show-parents">Afficher les notations Parentales :</label>
+                    <div style="display: flex; gap: 10px; width: 100%;">
+                        <button id="btn-show-m1" class="btn-secondary" style="flex:1; margin:0;" onclick="toggleParentBlock('m1')">♂️ M1</button>
+                        <button id="btn-show-m2" class="btn-secondary" style="flex:1; margin:0;" onclick="toggleParentBlock('m2')">♂️ M2</button>
+                        <button id="btn-show-f" class="btn-secondary" style="flex:1; margin:0;" onclick="toggleParentBlock('f')">♀️ F</button>
+                    </div>
                 </div>
-                <label data-i18n="stade">Stade :</label>
-                <select id="stade-m1" class="stade-select"><option value="">--</option></select>
-                <label data-i18n="commentaire">Commentaire :</label>
-                <input type="text" id="com-m1" placeholder="RAS..." data-i18n-placeholder="ras">
-                <button class="photo-btn" onclick="takePhoto('M1')">📷 <span data-i18n="photo">Photo</span> M1</button>
-                <input type="file" id="file-m1" accept="image/*" capture="environment" style="display:none;" onchange="handlePhoto(event, 'M1')">
-            </div>
 
-            <!-- MALE 2 -->
-            <div id="block-m2" class="notation-block male fade-in" style="display:none;">
-                <div class="block-header">
-                    <h4>♂️ Mâle 2 (<span id="lbl-male2">-</span>)</h4>
+                <!-- MALE 1 -->
+                <div id="block-m1" class="notation-block male fade-in" style="display:none;">
+                    <div class="block-header">
+                        <h4>♂️ Mâle 1 (<span id="lbl-male1">-</span>)</h4>
+                    </div>
+                    <label data-i18n="stade">Stade :</label>
+                    <select id="stade-m1" class="stade-select"><option value="">--</option></select>
+                    <label data-i18n="commentaire">Commentaire :</label>
+                    <input type="text" id="com-m1" placeholder="RAS..." data-i18n-placeholder="ras">
+                    <button class="photo-btn" onclick="takePhoto('M1')">📷 <span data-i18n="photo">Photo</span> M1</button>
+                    <input type="file" id="file-m1" accept="image/*" capture="environment" style="display:none;" onchange="handlePhoto(event, 'M1')">
                 </div>
-                <label data-i18n="stade">Stade :</label>
-                <select id="stade-m2" class="stade-select"><option value="">--</option></select>
-                <label data-i18n="commentaire">Commentaire :</label>
-                <input type="text" id="com-m2" placeholder="RAS..." data-i18n-placeholder="ras">
-                <button class="photo-btn" onclick="takePhoto('M2')">📷 <span data-i18n="photo">Photo</span> M2</button>
-                <input type="file" id="file-m2" accept="image/*" capture="environment" style="display:none;" onchange="handlePhoto(event, 'M2')">
-            </div>
 
-            <!-- FEMELLE -->
-            <div id="block-f" class="notation-block female fade-in" style="display:none;">
-                <div class="block-header">
-                    <h4>♀️ Femelle (<span id="lbl-female">-</span>)</h4>
+                <!-- MALE 2 -->
+                <div id="block-m2" class="notation-block male fade-in" style="display:none;">
+                    <div class="block-header">
+                        <h4>♂️ Mâle 2 (<span id="lbl-male2">-</span>)</h4>
+                    </div>
+                    <label data-i18n="stade">Stade :</label>
+                    <select id="stade-m2" class="stade-select"><option value="">--</option></select>
+                    <label data-i18n="commentaire">Commentaire :</label>
+                    <input type="text" id="com-m2" placeholder="RAS..." data-i18n-placeholder="ras">
+                    <button class="photo-btn" onclick="takePhoto('M2')">📷 <span data-i18n="photo">Photo</span> M2</button>
+                    <input type="file" id="file-m2" accept="image/*" capture="environment" style="display:none;" onchange="handlePhoto(event, 'M2')">
                 </div>
-                <label data-i18n="stade">Stade :</label>
-                <select id="stade-f" class="stade-select"><option value="">--</option></select>
-                <label data-i18n="commentaire">Commentaire :</label>
-                <input type="text" id="com-f" placeholder="RAS..." data-i18n-placeholder="ras">
-                <button class="photo-btn" onclick="takePhoto('F')">📷 <span data-i18n="photo">Photo</span> F</button>
-                <input type="file" id="file-f" accept="image/*" capture="environment" style="display:none;" onchange="handlePhoto(event, 'F')">
-            </div>
 
-            <!-- COMMENTAIRE PARCELLE -->
-            <div class="notation-block">
-                <h4 data-i18n="com-global">📝 Commentaire global parcelle</h4>
-                <textarea id="com-field" rows="3" placeholder="État général de la parcelle, adventices, etc..." data-i18n-placeholder="com-global-placeholder"></textarea>
-            </div>
+                <!-- FEMELLE -->
+                <div id="block-f" class="notation-block female fade-in" style="display:none;">
+                    <div class="block-header">
+                        <h4>♀️ Femelle (<span id="lbl-female">-</span>)</h4>
+                    </div>
+                    <label data-i18n="stade">Stade :</label>
+                    <select id="stade-f" class="stade-select"><option value="">--</option></select>
+                    <label data-i18n="commentaire">Commentaire :</label>
+                    <input type="text" id="com-f" placeholder="RAS..." data-i18n-placeholder="ras">
+                    <button class="photo-btn" onclick="takePhoto('F')">📷 <span data-i18n="photo">Photo</span> F</button>
+                    <input type="file" id="file-f" accept="image/*" capture="environment" style="display:none;" onchange="handlePhoto(event, 'F')">
+                </div>
 
-            <button onclick="saveNotation()" style="width: 100%; font-size: 1.5em; padding: 20px;" data-i18n="btn-save">✅ ENREGISTRER</button>
+                <!-- COMMENTAIRE PARCELLE -->
+                <div class="notation-block">
+                    <h4 data-i18n="com-global">📝 Commentaire global parcelle</h4>
+                    <textarea id="com-field" rows="3" placeholder="État général de la parcelle, adventices, etc..." data-i18n-placeholder="com-global-placeholder"></textarea>
+                </div>
+
+                <button onclick="saveNotation()" style="width: 100%; font-size: 1.5em; padding: 20px;" data-i18n="btn-save">✅ ENREGISTRER</button>
+            </div>
         </div>
 
         <!-- ONGLET 2 : RECAP JOUR -->
@@ -253,7 +258,7 @@
         <!-- ONGLET 3 : ANCIENNE VISITE -->
         <div id="AncienneVisite" class="tabcontent fade-in">
             <div class="card-panel">
-                <h3 data-i18n="charger-bdd">Charger oune ancienne base de données</h3>
+                <h3 data-i18n="charger-bdd">Charger une ancienne base de données</h3>
                 <input type="file" id="import-bdd" accept=".csv" style="border: 2px dashed var(--theme-secondary-color);">
                 <div style="overflow-x: auto; margin-top: 20px;">
                     <table id="table-archive">
@@ -297,10 +302,11 @@
                 
                 <hr style="border: 1px solid #eee; margin: 20px 0;">
                 
-                <!-- NOUVEAUX BOUTONS D'EXPORT & PURGE -->
-                <button class="btn-drive" onclick="exportToDrive()" style="width: 100%; margin-bottom: 15px; font-size:1.2em; padding: 20px; background-color: #0F9D58; color: white;" data-i18n="btn-export-drive" id="btn-drive-export">☁️ Exporter vers Google Drive</button>
+                <!-- NOUVEAU BOUTON : EXPORT NATIF (Partage système) -->
+                <button class="btn-share" onclick="exportNative()" style="width: 100%; margin-bottom: 15px; font-size:1.2em; padding: 20px;" data-i18n="btn-export-native">📤 Exporter (Partager / Sauvegarder)</button>
                 
-                <button class="btn-secondary" onclick="exportLocalCSV()" style="width: 100%; margin-bottom: 30px; font-size:1em;" data-i18n="btn-export-local">📥 Téléchargement Classique (Secours)</button>
+                <!-- NOUVEAU BOUTON : ACCÈS AU DOSSIER DRIVE -->
+                <button class="btn-drive" onclick="window.open('https://drive.google.com/drive/folders/16gbyfVxqv4EIOULbLnWLLDWkYJe3mrRY', '_blank')" style="width: 100%; margin-bottom: 30px; font-size:1em;" data-i18n="btn-access-drive">📁 Ouvrir le dossier Drive</button>
                 
                 <hr style="border: 1px solid #eee; margin: 20px 0;">
 
@@ -324,9 +330,6 @@
     </div>
 
     <script>
-        // ⚠️ REMPLACE CECI PAR L'URL DE TON APPS SCRIPT SI TU HÉBERGES SUR GITHUB PAGES
-        const WEB_APP_URL = "URL_DE_TON_APPS_SCRIPT_A_REMPLACER"; 
-
         /* =========================================
            TRADUCTIONS
            ========================================= */
@@ -345,18 +348,15 @@
                 "alert-user-plot": "Veuillez sélectionner un Utilisateur et une Parcelle complète.", "alert-no-gps": "Aucune coordonnée GPS pour cette parcelle.",
                 "alert-save-success": "Enregistrement réussi !", "alert-delete": "Supprimer cette ligne ?", "alert-no-export": "Aucune donnée à exporter.",
                 "btn-edit": "Modifier", "btn-del": "Supprimer", "photo-taken": "✅ Photo prise ({n})",
-                // NOUVELLES TRADUCTIONS
                 "load-bdd-parcelles": "📂 Charger la BDD Parcelles (Format CSV) :",
                 "bdd-info": "Ce fichier restera en mémoire dans l'application pour les prochaines fois.",
-                "btn-export-drive": "☁️ Exporter vers Google Drive",
-                "btn-export-local": "📥 Téléchargement Classique (Secours)",
+                "btn-export-native": "📤 Exporter (Partager / Sauvegarder)",
+                "btn-access-drive": "📁 Ouvrir le dossier Drive",
                 "btn-purge": "⚠️ Purger les données de l'année",
                 "alert-purge-confirm": "⚠️ ATTENTION : Cela va supprimer vos notations actuelles ET la base de données Parcelles. Vous repartirez à zéro. Êtes-vous sûr ?",
                 "alert-purged-success": "L'application a été purgée.",
                 "alert-bdd-loaded": "Base de données Parcelle chargée et mémorisée avec succès !",
-                "alert-drive-success": "✅ Export réussi sur Google Drive !",
-                "alert-drive-error": "❌ Erreur d'export Drive :",
-                "exporting": "⏳ Exportation en cours..."
+                "alert-export-success": "L'exportation est prête.",
             },
             en: {
                 "title": "Technical Notes", "config-session": "Session Setup", "user": "User:", "choisir": "-- Select --",
@@ -374,15 +374,13 @@
                 "btn-edit": "Edit", "btn-del": "Delete", "photo-taken": "✅ Photo taken ({n})",
                 "load-bdd-parcelles": "📂 Load Field Database (CSV Format):",
                 "bdd-info": "This file will remain in the application's memory for future use.",
-                "btn-export-drive": "☁️ Export to Google Drive",
-                "btn-export-local": "📥 Local Download (Backup)",
+                "btn-export-native": "📤 Export (Share / Save)",
+                "btn-access-drive": "📁 Open Drive Folder",
                 "btn-purge": "⚠️ Purge Year's Data",
                 "alert-purge-confirm": "⚠️ WARNING: This will delete your current records AND the Field database. You will start from scratch. Are you sure?",
                 "alert-purged-success": "The application has been purged.",
                 "alert-bdd-loaded": "Field database loaded and saved successfully!",
-                "alert-drive-success": "✅ Export to Google Drive successful!",
-                "alert-drive-error": "❌ Google Drive export error:",
-                "exporting": "⏳ Exporting..."
+                "alert-export-success": "Export is ready."
             },
             es: {
                 "title": "Notas Técnicas", "config-session": "Configuración de sesión", "user": "Usuario:", "choisir": "-- Elegir --",
@@ -400,15 +398,13 @@
                 "btn-edit": "Editar", "btn-del": "Borrar", "photo-taken": "✅ Foto tomada ({n})",
                 "load-bdd-parcelles": "📂 Cargar base de datos de parcelas (CSV):",
                 "bdd-info": "Este archivo permanecerá en la memoria de la aplicación.",
-                "btn-export-drive": "☁️ Exportar a Google Drive",
-                "btn-export-local": "📥 Descarga Local (Respaldo)",
+                "btn-export-native": "📤 Exportar (Compartir / Guardar)",
+                "btn-access-drive": "📁 Abrir carpeta Drive",
                 "btn-purge": "⚠️ Purgar datos del año",
                 "alert-purge-confirm": "⚠️ ADVERTENCIA: Esto eliminará sus registros actuales Y la base de datos de Parcelas. ¿Está seguro?",
                 "alert-purged-success": "La aplicación ha sido purgada.",
                 "alert-bdd-loaded": "¡Base de datos cargada y guardada con éxito!",
-                "alert-drive-success": "✅ ¡Exportación exitosa a Google Drive!",
-                "alert-drive-error": "❌ Error de exportación de Drive:",
-                "exporting": "⏳ Exportando..."
+                "alert-export-success": "La exportación está lista."
             },
             pl: {
                 "title": "Notatki Techniczne", "config-session": "Konfiguracja sesji", "user": "Użytkownik:", "choisir": "-- Wybierz --",
@@ -426,15 +422,13 @@
                 "btn-edit": "Edytuj", "btn-del": "Usuń", "photo-taken": "✅ Zdjęcie zrobione ({n})",
                 "load-bdd-parcelles": "📂 Załaduj bazę działek (CSV):",
                 "bdd-info": "Ten plik pozostanie w pamięci aplikacji.",
-                "btn-export-drive": "☁️ Eksportuj na Google Drive",
-                "btn-export-local": "📥 Pobieranie Lokalne (Zapasowe)",
+                "btn-export-native": "📤 Eksportuj (Udostępnij / Zapisz)",
+                "btn-access-drive": "📁 Otwórz folder Drive",
                 "btn-purge": "⚠️ Wyczyść dane z tego roku",
                 "alert-purge-confirm": "⚠️ UWAGA: Spowoduje to usunięcie bieżących rekordów ORAZ bazy danych Działek. Jesteś pewien?",
                 "alert-purged-success": "Aplikacja została wyczyszczona.",
                 "alert-bdd-loaded": "Baza danych została pomyślnie załadowana i zapisana!",
-                "alert-drive-success": "✅ Eksport na Google Drive udany!",
-                "alert-drive-error": "❌ Błąd eksportu na Drive:",
-                "exporting": "⏳ Eksportowanie..."
+                "alert-export-success": "Eksport gotowy."
             },
             ro: {
                 "title": "Notații Tehnice", "config-session": "Configurare sesiune", "user": "Utilizator:", "choisir": "-- Alege --",
@@ -452,15 +446,13 @@
                 "btn-edit": "Modifică", "btn-del": "Șterge", "photo-taken": "✅ Fotografie salvată ({n})",
                 "load-bdd-parcelles": "📂 Încărcați baza de date (Format CSV):",
                 "bdd-info": "Acest fișier va rămâne în memoria aplicației.",
-                "btn-export-drive": "☁️ Exportați pe Google Drive",
-                "btn-export-local": "📥 Descărcare Locală (Rezervă)",
+                "btn-export-native": "📤 Export (Distribuie / Salvează)",
+                "btn-access-drive": "📁 Deschide folderul Drive",
                 "btn-purge": "⚠️ Curățați datele anului",
                 "alert-purge-confirm": "⚠️ ATENȚIE: Aceasta va șterge înregistrările curente ȘI baza de date a parcelelor. Sunteți sigur?",
                 "alert-purged-success": "Aplicația a fost curățată.",
                 "alert-bdd-loaded": "Baza de date încărcată și salvată cu succes!",
-                "alert-drive-success": "✅ Export pe Google Drive reușit!",
-                "alert-drive-error": "❌ Eroare export Drive:",
-                "exporting": "⏳ Se exportă..."
+                "alert-export-success": "Exportul este gata."
             },
             uk: {
                 "title": "Технічні нотатки", "config-session": "Налаштування сесії", "user": "Користувач:", "choisir": "-- Вибрати --",
@@ -478,15 +470,13 @@
                 "btn-edit": "Змінити", "btn-del": "Видалити", "photo-taken": "✅ Фото зроблено ({n})",
                 "load-bdd-parcelles": "📂 Завантажити базу ділянок (Формат CSV):",
                 "bdd-info": "Цей файл залишиться в пам'яті програми.",
-                "btn-export-drive": "☁️ Експортувати на Google Drive",
-                "btn-export-local": "📥 Локальне завантаження (Резервне)",
+                "btn-export-native": "📤 Експорт (Поділитися / Зберегти)",
+                "btn-access-drive": "📁 Відкрити папку Drive",
                 "btn-purge": "⚠️ Очистити дані за рік",
                 "alert-purge-confirm": "⚠️ УВАГА: Це видалить ваші поточні записи ТА базу даних ділянок. Ви впевнені?",
                 "alert-purged-success": "Додаток було очищено.",
                 "alert-bdd-loaded": "База даних успішно завантажена та збережена!",
-                "alert-drive-success": "✅ Експорт на Google Drive успішний!",
-                "alert-drive-error": "❌ Помилка експорту Drive:",
-                "exporting": "⏳ Експортування..."
+                "alert-export-success": "Експорт готовий."
             }
         };
 
@@ -598,7 +588,7 @@ Pologne,TEST-03,52.22 21.01,Kowalski,SUN_T,FEM_C,MAL_C`;
             
             document.getElementById('setup-date').valueAsDate = new Date();
             initStadesDropdowns();
-            loadParcellesBDD(); // Charge Test + Custom CSV BDD
+            loadParcellesBDD(); 
             restoreSetupChoices();
             renderRecapTable();
             
@@ -624,7 +614,6 @@ Pologne,TEST-03,52.22 21.01,Kowalski,SUN_T,FEM_C,MAL_C`;
             tbody.innerHTML = bddStades.map(s => `<tr><td>${s.Stade}</td><td><strong>${s.Code_Stade}</strong></td></tr>`).join('');
         }
 
-        // 🌟 FONCTION QUI MERGE LE TEST ET LE FICHIER CSV UPLOADÉ
         function loadParcellesBDD() {
             let combinedCSV = testParcelles;
             let customBDD = localStorage.getItem('prod_custom_bdd_parcelles');
@@ -632,7 +621,7 @@ Pologne,TEST-03,52.22 21.01,Kowalski,SUN_T,FEM_C,MAL_C`;
             if (customBDD) {
                 let customLines = customBDD.trim().split(/\r?\n/);
                 if(customLines.length > 1) {
-                    customLines.shift(); // Enlève la ligne d'en-tête pour fusionner proprement
+                    customLines.shift(); 
                     combinedCSV += "\n" + customLines.join("\n");
                 }
             }
@@ -640,7 +629,6 @@ Pologne,TEST-03,52.22 21.01,Kowalski,SUN_T,FEM_C,MAL_C`;
             initCascadingSelects();
         }
 
-        // 🌟 LISTENER POUR CHARGER UN FICHIER DE PARCELLES DEPUIS L'ACCUEIL
         document.getElementById('import-bdd-parcelles').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (!file) return;
@@ -722,15 +710,19 @@ Pologne,TEST-03,52.22 21.01,Kowalski,SUN_T,FEM_C,MAL_C`;
 
             resetForm();
 
+            // On masque le panneau de config et on affiche la zone de saisie
             document.getElementById('session-setup').style.display = 'none';
-            document.getElementById('app-container').style.display = 'block';
-            document.getElementById('tab-btn-notations').click();
+            document.getElementById('notation-form').style.display = 'block';
         };
 
         window.changeParcelle = () => {
-            document.getElementById('app-container').style.display = 'none';
+            // On ramène l'utilisateur à l'onglet "Notations"
+            document.getElementById('tab-btn-notations').click();
+            // On masque le formulaire, et on raffiche la config
+            document.getElementById('notation-form').style.display = 'none';
             document.getElementById('session-setup').style.display = 'block';
             document.getElementById('setup-plot').value = ""; 
+            currentPlotData = null;
         };
 
         window.toggleParentBlock = (type) => {
@@ -883,6 +875,9 @@ Pologne,TEST-03,52.22 21.01,Kowalski,SUN_T,FEM_C,MAL_C`;
             const obsToEdit = observations.find(o => o.id === id);
             if(!obsToEdit) return;
 
+            // Retour automatique sur l'onglet Notations si ce n'est pas déjà le cas
+            document.getElementById('tab-btn-notations').click();
+
             document.getElementById('setup-country').value = obsToEdit.Country;
             filterFarms();
             document.getElementById('setup-farmer').value = obsToEdit.Farmer;
@@ -953,7 +948,7 @@ Pologne,TEST-03,52.22 21.01,Kowalski,SUN_T,FEM_C,MAL_C`;
             return csv;
         }
 
-        // 🌟 BOUTON 1 : EXPORT LOCAL (SECOURS)
+        // 🌟 BOUTON 1 : EXPORT LOCAL CLASSIQUE (TELECHARGEMENT)
         window.exportLocalCSV = () => {
             if(observations.length === 0) return alert(getT('alert-no-export'));
             const dateStr = document.getElementById('setup-date').value;
@@ -964,54 +959,33 @@ Pologne,TEST-03,52.22 21.01,Kowalski,SUN_T,FEM_C,MAL_C`;
             a.click();
         };
 
-        // 🌟 BOUTON 2 : EXPORT GOOGLE DRIVE
-        window.exportToDrive = async () => {
+        // 🌟 BOUTON 2 : EXPORT NATIF (MENU DE PARTAGE MOBILE)
+        window.exportNative = async () => {
             if(observations.length === 0) return alert(getT('alert-no-export'));
             
-            // Si l'utilisateur est sur l'app directement hébergée par Google Apps Script
-            if (typeof google !== 'undefined' && google.script && google.script.run) {
-                document.getElementById('btn-drive-export').innerHTML = getT('exporting');
-                const dateStr = document.getElementById('setup-date').value;
-                const filename = `Export_App_${dateStr}.csv`;
-                
-                google.script.run
-                    .withSuccessHandler((url) => {
-                        document.getElementById('btn-drive-export').innerHTML = getT('btn-export-drive');
-                        alert(getT('alert-drive-success') + " " + url);
-                    })
-                    .withFailureHandler((err) => {
-                        document.getElementById('btn-drive-export').innerHTML = getT('btn-export-drive');
-                        alert(getT('alert-drive-error') + " " + err);
-                    })
-                    .saveFileToDrive(getCSVString(), filename);
-            } else {
-                // Si l'utilisateur a hébergé son code sur GitHub et utilise le WebApp URL (API)
-                if(WEB_APP_URL === "URL_DE_TON_APPS_SCRIPT_A_REMPLACER") {
-                    alert("⚠️ L'URL de Google Apps Script n'est pas configurée dans le code. Le téléchargement local va se lancer en secours.");
-                    return exportLocalCSV();
-                }
+            const dateStr = document.getElementById('setup-date').value;
+            const filename = `Export_App_${dateStr}.csv`;
+            const csvString = getCSVString();
+            
+            // Création du fichier physique
+            const blob = new Blob([csvString], {type: 'text/csv;charset=utf-8'});
+            const file = new File([blob], filename, {type: 'text/csv'});
 
-                document.getElementById('btn-drive-export').innerHTML = getT('exporting');
-                const filename = `Export_App_${document.getElementById('setup-date').value}.csv`;
-                const payload = { csv: getCSVString(), filename: filename };
-                
+            // Si le téléphone supporte le partage de fichier natif
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
                 try {
-                    const response = await fetch(WEB_APP_URL, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                        body: JSON.stringify(payload),
-                        redirect: 'follow'
+                    await navigator.share({
+                        files: [file],
+                        title: 'Export Notations',
+                        text: 'Voici le fichier d\'export des notations pour la journée.'
                     });
-                    const result = await response.json();
-                    if(result.status === "success") {
-                        alert(getT('alert-drive-success'));
-                    } else {
-                        alert(getT('alert-drive-error') + " " + result.message);
-                    }
-                } catch(e) {
-                    alert(getT('alert-drive-error') + " (Avez-vous retrouvé le réseau Internet ?)");
+                    alert(getT('alert-export-success'));
+                } catch (error) {
+                    console.log('Partage annulé ou échoué', error);
                 }
-                document.getElementById('btn-drive-export').innerHTML = getT('btn-export-drive');
+            } else {
+                // Si l'utilisateur est sur ordinateur ou sur un navigateur qui ne le supporte pas, on lance le téléchargement classique
+                exportLocalCSV();
             }
         };
 
