@@ -4,18 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0.3">
+    
+    <!-- CONFIGURATION POUR APPLICATION NATIVE PWA (Hors-ligne) -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Notations">
     <title>Notations Techniques</title>
     <meta name="theme-color" content="#E67E22">
     <link rel="icon" href="data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23E3F2FD' stroke='%233498DB' stroke-width='2'/%3E%3Cpath d='M 50 10 A 20 40 0 0 0 50 90 A 20 40 0 0 0 50 10' fill='none' stroke='%233498DB' stroke-width='1.5' opacity='0.6'/%3E%3Cpath d='M 10 50 A 40 20 0 0 0 90 50 A 40 20 0 0 0 10 50' fill='none' stroke='%233498DB' stroke-width='1.5' opacity='0.6'/%3E%3Cg fill='%23F1C40F' stroke='%23E67E22' stroke-width='1'%3E%3Cellipse cx='50' cy='25' rx='6' ry='15' /%3E%3Cellipse cx='50' cy='75' rx='6' ry='15' /%3E%3Cellipse cx='25' cy='50' rx='15' ry='6' /%3E%3Cellipse cx='75' cy='50' rx='15' ry='6' /%3E%3Cellipse cx='32' cy='32' rx='15' ry='6' transform='rotate(45 32 32)' /%3E%3Cellipse cx='68' cy='68' rx='15' ry='6' transform='rotate(45 68 68)' /%3E%3Cellipse cx='32' cy='68' rx='15' ry='6' transform='rotate(-45 32 68)' /%3E%3Cellipse cx='68' cy='32' rx='15' ry='6' transform='rotate(-45 68 32)' /%3E%3C/g%3E%3Ccircle cx='50' cy='50' r='12' fill='%235D4037' /%3E%3Ccircle cx='50' cy='50' r='10' fill='%234E342E' stroke='%233E2723' stroke-width='1' stroke-dasharray='2,2'/%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23E3F2FD' stroke='%233498DB' stroke-width='2'/%3E%3Cpath d='M 50 10 A 20 40 0 0 0 50 90 A 20 40 0 0 0 50 10' fill='none' stroke='%233498DB' stroke-width='1.5' opacity='0.6'/%3E%3Cpath d='M 10 50 A 40 20 0 0 0 90 50 A 40 20 0 0 0 10 50' fill='none' stroke='%233498DB' stroke-width='1.5' opacity='0.6'/%3E%3Cg fill='%23F1C40F' stroke='%23E67E22' stroke-width='1'%3E%3Cellipse cx='50' cy='25' rx='6' ry='15' /%3E%3Cellipse cx='50' cy='75' rx='6' ry='15' /%3E%3Cellipse cx='25' cy='50' rx='15' ry='6' /%3E%3Cellipse cx='75' cy='50' rx='15' ry='6' /%3E%3Cellipse cx='32' cy='32' rx='15' ry='6' transform='rotate(45 32 32)' /%3E%3Cellipse cx='68' cy='68' rx='15' ry='6' transform='rotate(45 68 68)' /%3E%3Cellipse cx='32' cy='68' rx='15' ry='6' transform='rotate(-45 32 68)' /%3E%3Cellipse cx='68' cy='32' rx='15' ry='6' transform='rotate(-45 68 32)' /%3E%3C/g%3E%3Ccircle cx='50' cy='50' r='12' fill='%235D4037' /%3E%3C/svg%3E">
+    
     <style>
         html { zoom: 0.8; }
         :root {
-            /* Palette Tournesol */
-            --theme-primary-color: #E67E22; /* Orange chaleureux */
-            --theme-secondary-color: #5D4037; /* Marron Terre */
+            --theme-primary-color: #E67E22;
+            --theme-secondary-color: #5D4037;
             --theme-text-on-primary: white; 
             --theme-text-on-secondary: white;
-            --theme-heading-color: #D35400; /* Orange foncé */
+            --theme-heading-color: #D35400;
             --theme-button-hover-bg: #D35400;
             --theme-tab-active-bg: #E67E22; 
             --theme-tab-active-text: white;
@@ -80,11 +87,9 @@
 
     <div style="text-align: center; margin-bottom: 15px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
         <svg width="80" height="80" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <!-- Globe -->
             <circle cx="50" cy="50" r="40" fill="#E3F2FD" stroke="#3498DB" stroke-width="2"/>
             <path d="M 50 10 A 20 40 0 0 0 50 90 A 20 40 0 0 0 50 10" fill="none" stroke="#3498DB" stroke-width="1.5" opacity="0.6"/>
             <path d="M 10 50 A 40 20 0 0 0 90 50 A 40 20 0 0 0 10 50" fill="none" stroke="#3498DB" stroke-width="1.5" opacity="0.6"/>
-            <!-- Tournesol -->
             <g fill="#F1C40F" stroke="#E67E22" stroke-width="1">
                 <ellipse cx="50" cy="25" rx="6" ry="15" />
                 <ellipse cx="50" cy="75" rx="6" ry="15" />
@@ -95,7 +100,6 @@
                 <ellipse cx="32" cy="68" rx="15" ry="6" transform="rotate(-45 32 68)" />
                 <ellipse cx="68" cy="32" rx="15" ry="6" transform="rotate(-45 68 32)" />
             </g>
-            <!-- Cœur du tournesol -->
             <circle cx="50" cy="50" r="12" fill="#5D4037" />
             <circle cx="50" cy="50" r="10" fill="#4E342E" stroke="#3E2723" stroke-width="1" stroke-dasharray="2,2"/>
         </svg>
@@ -106,6 +110,13 @@
     <div id="session-setup" class="fade-in">
         <h2 style="margin-top:0;" data-i18n="config-session">Configuration de la session</h2>
         
+        <!-- NOUVEAU : CHARGEMENT BDD -->
+        <div style="background-color: #eef2f3; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px dashed #ccc;">
+            <label data-i18n="load-bdd-parcelles">📂 Charger la BDD Parcelles (Format CSV) :</label>
+            <p style="font-size: 0.85em; color: #555; margin-top: 0;" data-i18n="bdd-info">Ce fichier restera en mémoire dans l'application pour les prochaines fois.</p>
+            <input type="file" id="import-bdd-parcelles" accept=".csv" style="background: white;">
+        </div>
+
         <label data-i18n="user">Utilisateur :</label>
         <select id="setup-user">
             <option value="" data-i18n="choisir">-- Choisir --</option>
@@ -156,7 +167,6 @@
                 </div>
             </div>
 
-            <!-- NOUVEAUX BOUTONS PARENTS -->
             <div class="card-panel" style="padding: 15px 20px;">
                 <label style="margin-bottom: 10px;" data-i18n="show-parents">Afficher les notations Parentales :</label>
                 <div style="display: flex; gap: 10px; width: 100%;">
@@ -205,7 +215,7 @@
                 <input type="file" id="file-f" accept="image/*" capture="environment" style="display:none;" onchange="handlePhoto(event, 'F')">
             </div>
 
-            <!-- COMMENTAIRE PARCELLE (Toujours visible) -->
+            <!-- COMMENTAIRE PARCELLE -->
             <div class="notation-block">
                 <h4 data-i18n="com-global">📝 Commentaire global parcelle</h4>
                 <textarea id="com-field" rows="3" placeholder="État général de la parcelle, adventices, etc..." data-i18n-placeholder="com-global-placeholder"></textarea>
@@ -243,7 +253,7 @@
         <!-- ONGLET 3 : ANCIENNE VISITE -->
         <div id="AncienneVisite" class="tabcontent fade-in">
             <div class="card-panel">
-                <h3 data-i18n="charger-bdd">Charger une ancienne base de données</h3>
+                <h3 data-i18n="charger-bdd">Charger oune ancienne base de données</h3>
                 <input type="file" id="import-bdd" accept=".csv" style="border: 2px dashed var(--theme-secondary-color);">
                 <div style="overflow-x: auto; margin-top: 20px;">
                     <table id="table-archive">
@@ -283,8 +293,18 @@
                     </select>
                 </div>
 
-                <button class="btn-accent" onclick="changeParcelle()" style="width: 100%; margin-bottom: 15px; font-size:1.2em;" data-i18n="btn-changer">🔄 Changer de Parcelle</button>
-                <button class="btn-primary" onclick="exportAndClear()" style="width: 100%; font-size:1.2em; background-color:#e67e22;" data-i18n="btn-export">📤 Exporter CSV (et purger)</button>
+                <button class="btn-accent" onclick="changeParcelle()" style="width: 100%; margin-bottom: 25px; font-size:1.2em;" data-i18n="btn-changer">🔄 Changer de Parcelle</button>
+                
+                <hr style="border: 1px solid #eee; margin: 20px 0;">
+                
+                <!-- NOUVEAUX BOUTONS D'EXPORT & PURGE -->
+                <button class="btn-drive" onclick="exportToDrive()" style="width: 100%; margin-bottom: 15px; font-size:1.2em; padding: 20px; background-color: #0F9D58; color: white;" data-i18n="btn-export-drive" id="btn-drive-export">☁️ Exporter vers Google Drive</button>
+                
+                <button class="btn-secondary" onclick="exportLocalCSV()" style="width: 100%; margin-bottom: 30px; font-size:1em;" data-i18n="btn-export-local">📥 Téléchargement Classique (Secours)</button>
+                
+                <hr style="border: 1px solid #eee; margin: 20px 0;">
+
+                <button class="btn-danger" onclick="purgeData()" style="width: 100%; font-size:1em;" data-i18n="btn-purge">⚠️ Purger les données de l'année</button>
             </div>
         </div>
     </div>
@@ -304,6 +324,9 @@
     </div>
 
     <script>
+        // ⚠️ REMPLACE CECI PAR L'URL DE TON APPS SCRIPT SI TU HÉBERGES SUR GITHUB PAGES
+        const WEB_APP_URL = "URL_DE_TON_APPS_SCRIPT_A_REMPLACER"; 
+
         /* =========================================
            TRADUCTIONS
            ========================================= */
@@ -317,12 +340,23 @@
                 "com-global-placeholder": "État général de la parcelle, adventices, etc...", "btn-save": "✅ ENREGISTRER",
                 "saisies-jour": "Saisies de la journée", "th-parc": "Parcelle", "th-photos": "Photos", "th-action": "Action",
                 "charger-bdd": "Charger une ancienne base de données", "th-date": "Date", "aucune-donnee": "Aucune donnée chargée",
-                "nav-actions": "Navigation & Actions", "langue": "Langue / Language :", "btn-changer": "🔄 Changer de Parcelle", "btn-export": "📤 Exporter CSV (et purger)",
+                "nav-actions": "Navigation & Actions", "langue": "Langue / Language :", "btn-changer": "🔄 Changer de Parcelle",
                 "codes-stades": "Codes Stades", "code": "Code",
                 "alert-user-plot": "Veuillez sélectionner un Utilisateur et une Parcelle complète.", "alert-no-gps": "Aucune coordonnée GPS pour cette parcelle.",
                 "alert-save-success": "Enregistrement réussi !", "alert-delete": "Supprimer cette ligne ?", "alert-no-export": "Aucune donnée à exporter.",
-                "alert-export-success": "Le fichier a été téléchargé. Voulez-vous effacer les données de la tablette pour commencer une nouvelle session ?",
-                "alert-purged": "Données effacées.", "btn-edit": "Modifier", "btn-del": "Supprimer", "photo-taken": "✅ Photo prise ({n})"
+                "btn-edit": "Modifier", "btn-del": "Supprimer", "photo-taken": "✅ Photo prise ({n})",
+                // NOUVELLES TRADUCTIONS
+                "load-bdd-parcelles": "📂 Charger la BDD Parcelles (Format CSV) :",
+                "bdd-info": "Ce fichier restera en mémoire dans l'application pour les prochaines fois.",
+                "btn-export-drive": "☁️ Exporter vers Google Drive",
+                "btn-export-local": "📥 Téléchargement Classique (Secours)",
+                "btn-purge": "⚠️ Purger les données de l'année",
+                "alert-purge-confirm": "⚠️ ATTENTION : Cela va supprimer vos notations actuelles ET la base de données Parcelles. Vous repartirez à zéro. Êtes-vous sûr ?",
+                "alert-purged-success": "L'application a été purgée.",
+                "alert-bdd-loaded": "Base de données Parcelle chargée et mémorisée avec succès !",
+                "alert-drive-success": "✅ Export réussi sur Google Drive !",
+                "alert-drive-error": "❌ Erreur d'export Drive :",
+                "exporting": "⏳ Exportation en cours..."
             },
             en: {
                 "title": "Technical Notes", "config-session": "Session Setup", "user": "User:", "choisir": "-- Select --",
@@ -333,12 +367,22 @@
                 "com-global-placeholder": "General state of the field, weeds, etc...", "btn-save": "✅ SAVE",
                 "saisies-jour": "Today's records", "th-parc": "Field", "th-photos": "Photos", "th-action": "Action",
                 "charger-bdd": "Load previous database", "th-date": "Date", "aucune-donnee": "No data loaded",
-                "nav-actions": "Navigation & Actions", "langue": "Language:", "btn-changer": "🔄 Change Field", "btn-export": "📤 Export CSV (and clear)",
+                "nav-actions": "Navigation & Actions", "langue": "Language:", "btn-changer": "🔄 Change Field",
                 "codes-stades": "Stage Codes", "code": "Code",
                 "alert-user-plot": "Please select a User and a complete Field.", "alert-no-gps": "No GPS coordinates for this field.",
                 "alert-save-success": "Saved successfully!", "alert-delete": "Delete this row?", "alert-no-export": "No data to export.",
-                "alert-export-success": "File downloaded. Do you want to clear tablet data to start a new session?",
-                "alert-purged": "Data cleared.", "btn-edit": "Edit", "btn-del": "Delete", "photo-taken": "✅ Photo taken ({n})"
+                "btn-edit": "Edit", "btn-del": "Delete", "photo-taken": "✅ Photo taken ({n})",
+                "load-bdd-parcelles": "📂 Load Field Database (CSV Format):",
+                "bdd-info": "This file will remain in the application's memory for future use.",
+                "btn-export-drive": "☁️ Export to Google Drive",
+                "btn-export-local": "📥 Local Download (Backup)",
+                "btn-purge": "⚠️ Purge Year's Data",
+                "alert-purge-confirm": "⚠️ WARNING: This will delete your current records AND the Field database. You will start from scratch. Are you sure?",
+                "alert-purged-success": "The application has been purged.",
+                "alert-bdd-loaded": "Field database loaded and saved successfully!",
+                "alert-drive-success": "✅ Export to Google Drive successful!",
+                "alert-drive-error": "❌ Google Drive export error:",
+                "exporting": "⏳ Exporting..."
             },
             es: {
                 "title": "Notas Técnicas", "config-session": "Configuración de sesión", "user": "Usuario:", "choisir": "-- Elegir --",
@@ -349,12 +393,22 @@
                 "com-global-placeholder": "Estado general, malezas, etc...", "btn-save": "✅ GUARDAR",
                 "saisies-jour": "Registros de hoy", "th-parc": "Parcela", "th-photos": "Fotos", "th-action": "Acción",
                 "charger-bdd": "Cargar base de datos anterior", "th-date": "Fecha", "aucune-donnee": "Sin datos",
-                "nav-actions": "Navegación y Acciones", "langue": "Idioma:", "btn-changer": "🔄 Cambiar Parcela", "btn-export": "📤 Exportar CSV (y borrar)",
+                "nav-actions": "Navegación y Acciones", "langue": "Idioma:", "btn-changer": "🔄 Cambiar Parcela", 
                 "codes-stades": "Códigos de estadios", "code": "Código",
                 "alert-user-plot": "Por favor seleccione un Usuario y una Parcela completa.", "alert-no-gps": "Sin coordenadas GPS.",
                 "alert-save-success": "¡Guardado con éxito!", "alert-delete": "¿Borrar esta fila?", "alert-no-export": "Sin datos para exportar.",
-                "alert-export-success": "Archivo descargado. ¿Borrar datos de la tableta para iniciar nueva sesión?",
-                "alert-purged": "Datos borrados.", "btn-edit": "Editar", "btn-del": "Borrar", "photo-taken": "✅ Foto tomada ({n})"
+                "btn-edit": "Editar", "btn-del": "Borrar", "photo-taken": "✅ Foto tomada ({n})",
+                "load-bdd-parcelles": "📂 Cargar base de datos de parcelas (CSV):",
+                "bdd-info": "Este archivo permanecerá en la memoria de la aplicación.",
+                "btn-export-drive": "☁️ Exportar a Google Drive",
+                "btn-export-local": "📥 Descarga Local (Respaldo)",
+                "btn-purge": "⚠️ Purgar datos del año",
+                "alert-purge-confirm": "⚠️ ADVERTENCIA: Esto eliminará sus registros actuales Y la base de datos de Parcelas. ¿Está seguro?",
+                "alert-purged-success": "La aplicación ha sido purgada.",
+                "alert-bdd-loaded": "¡Base de datos cargada y guardada con éxito!",
+                "alert-drive-success": "✅ ¡Exportación exitosa a Google Drive!",
+                "alert-drive-error": "❌ Error de exportación de Drive:",
+                "exporting": "⏳ Exportando..."
             },
             pl: {
                 "title": "Notatki Techniczne", "config-session": "Konfiguracja sesji", "user": "Użytkownik:", "choisir": "-- Wybierz --",
@@ -365,12 +419,22 @@
                 "com-global-placeholder": "Stan ogólny, chwasty, itp...", "btn-save": "✅ ZAPISZ",
                 "saisies-jour": "Dzisiejsze wpisy", "th-parc": "Działka", "th-photos": "Zdjęcia", "th-action": "Akcja",
                 "charger-bdd": "Załaduj poprzednią bazę", "th-date": "Data", "aucune-donnee": "Brak danych",
-                "nav-actions": "Nawigacja i Akcje", "langue": "Język:", "btn-changer": "🔄 Zmień działkę", "btn-export": "📤 Eksportuj CSV (i wyczyść)",
+                "nav-actions": "Nawigacja i Akcje", "langue": "Język:", "btn-changer": "🔄 Zmień działkę", 
                 "codes-stades": "Kody Faz", "code": "Kod",
                 "alert-user-plot": "Wybierz Użytkownika i kompletną Działkę.", "alert-no-gps": "Brak współrzędnych GPS.",
                 "alert-save-success": "Zapisano pomyślnie!", "alert-delete": "Usunąć ten wiersz?", "alert-no-export": "Brak danych do eksportu.",
-                "alert-export-success": "Pobrano plik. Czy wyczyścić dane z tabletu, aby rozpocząć nową sesję?",
-                "alert-purged": "Dane wyczyszczone.", "btn-edit": "Edytuj", "btn-del": "Usuń", "photo-taken": "✅ Zdjęcie zrobione ({n})"
+                "btn-edit": "Edytuj", "btn-del": "Usuń", "photo-taken": "✅ Zdjęcie zrobione ({n})",
+                "load-bdd-parcelles": "📂 Załaduj bazę działek (CSV):",
+                "bdd-info": "Ten plik pozostanie w pamięci aplikacji.",
+                "btn-export-drive": "☁️ Eksportuj na Google Drive",
+                "btn-export-local": "📥 Pobieranie Lokalne (Zapasowe)",
+                "btn-purge": "⚠️ Wyczyść dane z tego roku",
+                "alert-purge-confirm": "⚠️ UWAGA: Spowoduje to usunięcie bieżących rekordów ORAZ bazy danych Działek. Jesteś pewien?",
+                "alert-purged-success": "Aplikacja została wyczyszczona.",
+                "alert-bdd-loaded": "Baza danych została pomyślnie załadowana i zapisana!",
+                "alert-drive-success": "✅ Eksport na Google Drive udany!",
+                "alert-drive-error": "❌ Błąd eksportu na Drive:",
+                "exporting": "⏳ Eksportowanie..."
             },
             ro: {
                 "title": "Notații Tehnice", "config-session": "Configurare sesiune", "user": "Utilizator:", "choisir": "-- Alege --",
@@ -381,12 +445,22 @@
                 "com-global-placeholder": "Starea generală, buruieni, etc...", "btn-save": "✅ SALVEAZĂ",
                 "saisies-jour": "Înregistrările de azi", "th-parc": "Parcela", "th-photos": "Fotografii", "th-action": "Acțiune",
                 "charger-bdd": "Încarcă baza de date anterioară", "th-date": "Data", "aucune-donnee": "Nu există date",
-                "nav-actions": "Navigare & Acțiuni", "langue": "Limba:", "btn-changer": "🔄 Schimbă Parcela", "btn-export": "📤 Export CSV (și șterge)",
+                "nav-actions": "Navigare & Acțiuni", "langue": "Limba:", "btn-changer": "🔄 Schimbă Parcela",
                 "codes-stades": "Coduri Stadii", "code": "Cod",
                 "alert-user-plot": "Vă rugăm să selectați un Utilizator și o Parcelă completă.", "alert-no-gps": "Fără coordonate GPS.",
                 "alert-save-success": "Salvat cu succes!", "alert-delete": "Ștergeți acest rând?", "alert-no-export": "Nu există date de exportat.",
-                "alert-export-success": "Fișier descărcat. Doriți să ștergeți datele de pe tabletă pentru o nouă sesiune?",
-                "alert-purged": "Date șterse.", "btn-edit": "Modifică", "btn-del": "Șterge", "photo-taken": "✅ Fotografie salvată ({n})"
+                "btn-edit": "Modifică", "btn-del": "Șterge", "photo-taken": "✅ Fotografie salvată ({n})",
+                "load-bdd-parcelles": "📂 Încărcați baza de date (Format CSV):",
+                "bdd-info": "Acest fișier va rămâne în memoria aplicației.",
+                "btn-export-drive": "☁️ Exportați pe Google Drive",
+                "btn-export-local": "📥 Descărcare Locală (Rezervă)",
+                "btn-purge": "⚠️ Curățați datele anului",
+                "alert-purge-confirm": "⚠️ ATENȚIE: Aceasta va șterge înregistrările curente ȘI baza de date a parcelelor. Sunteți sigur?",
+                "alert-purged-success": "Aplicația a fost curățată.",
+                "alert-bdd-loaded": "Baza de date încărcată și salvată cu succes!",
+                "alert-drive-success": "✅ Export pe Google Drive reușit!",
+                "alert-drive-error": "❌ Eroare export Drive:",
+                "exporting": "⏳ Se exportă..."
             },
             uk: {
                 "title": "Технічні нотатки", "config-session": "Налаштування сесії", "user": "Користувач:", "choisir": "-- Вибрати --",
@@ -397,12 +471,22 @@
                 "com-global-placeholder": "Загальний стан, бур'яни, тощо...", "btn-save": "✅ ЗБЕРЕГТИ",
                 "saisies-jour": "Записи за сьогодні", "th-parc": "Ділянка", "th-photos": "Фото", "th-action": "Дія",
                 "charger-bdd": "Завантажити попередню базу", "th-date": "Дата", "aucune-donnee": "Немає даних",
-                "nav-actions": "Навігація та Дії", "langue": "Мова:", "btn-changer": "🔄 Змінити ділянку", "btn-export": "📤 Експорт CSV (і очистити)",
+                "nav-actions": "Навігація та Дії", "langue": "Мова:", "btn-changer": "🔄 Змінити ділянку",
                 "codes-stades": "Коди стадій", "code": "Код",
                 "alert-user-plot": "Виберіть користувача та ділянку.", "alert-no-gps": "Немає GPS-координат.",
                 "alert-save-success": "Збережено успішно!", "alert-delete": "Видалити цей рядок?", "alert-no-export": "Немає даних для експорту.",
-                "alert-export-success": "Файл завантажено. Очистити дані планшета для нової сесії?",
-                "alert-purged": "Дані очищено.", "btn-edit": "Змінити", "btn-del": "Видалити", "photo-taken": "✅ Фото зроблено ({n})"
+                "btn-edit": "Змінити", "btn-del": "Видалити", "photo-taken": "✅ Фото зроблено ({n})",
+                "load-bdd-parcelles": "📂 Завантажити базу ділянок (Формат CSV):",
+                "bdd-info": "Цей файл залишиться в пам'яті програми.",
+                "btn-export-drive": "☁️ Експортувати на Google Drive",
+                "btn-export-local": "📥 Локальне завантаження (Резервне)",
+                "btn-purge": "⚠️ Очистити дані за рік",
+                "alert-purge-confirm": "⚠️ УВАГА: Це видалить ваші поточні записи ТА базу даних ділянок. Ви впевнені?",
+                "alert-purged-success": "Додаток було очищено.",
+                "alert-bdd-loaded": "База даних успішно завантажена та збережена!",
+                "alert-drive-success": "✅ Експорт на Google Drive успішний!",
+                "alert-drive-error": "❌ Помилка експорту Drive:",
+                "exporting": "⏳ Експортування..."
             }
         };
 
@@ -423,17 +507,17 @@
             });
             localStorage.setItem('selected_lang', lang);
             
-            // Refreshes for dynamic alerts/buttons if necessary
+            // Refresh dynamic buttons
             document.querySelectorAll('.photo-btn').forEach(btn => {
                 if(!btn.innerHTML.includes('✅')) {
-                    const type = btn.getAttribute('onclick').match(/'([^']+)'/)[1]; // Extract 'M1', 'M2', 'F'
+                    const type = btn.getAttribute('onclick').match(/'([^']+)'/)[1];
                     btn.innerHTML = `📷 ${getT('photo')} ${type}`;
                 }
             });
         };
 
         /* =========================================
-           BASES DE DONNÉES (Fixes via CSV fournis)
+           BASES DE DONNÉES ET CHARGEMENT
            ========================================= */
         const rawStades = `Stade,Code_Stade
 Semis,S
@@ -460,12 +544,13 @@ Fin floraison,FFLO
 Maturité,MAT
 Récolte,REC`;
 
-        const rawParcelles = `Country,Field_ID,Position GPS,Farmer,Variety,Female,Male
-,,`;
+        // 🌟 PARCELLES TEST INTEGREES :
+        const testParcelles = `Country,Field_ID,Position GPS,Farmer,Variety,Female,Male
+France,TEST-01,48.85 2.35,Dupont,LID 5053L,FEM_A,MAL_A
+Espagne,TEST-02,40.41 -3.70,Garcia,MYLADY,FEM_B,MAL_B
+Pologne,TEST-03,52.22 21.01,Kowalski,SUN_T,FEM_C,MAL_C`;
 
-        // Parseur CSV robuste avec nettoyage du BOM (ï»¿)
         function parseCSV(csvString) {
-            // Retire le BOM s'il existe au tout début de la chaine
             csvString = csvString.replace(/^\uFEFF/, '');
             const lines = csvString.trim().split(/\r?\n/);
             if (lines.length < 2) return [];
@@ -495,7 +580,7 @@ Récolte,REC`;
         }
 
         const bddStades = parseCSV(rawStades);
-        const bddParcelles = parseCSV(rawParcelles);
+        let bddParcelles = [];
         
         let observations = JSON.parse(localStorage.getItem('prod_obs_v1') || "[]");
         let currentPlotData = null;
@@ -504,7 +589,7 @@ Récolte,REC`;
         let visibleParents = { m1: false, m2: false, f: false };
 
         /* =========================================
-           INITIALISATION ET LOGIQUE DE NAVIGATION
+           INITIALISATION
            ========================================= */
         document.addEventListener('DOMContentLoaded', () => {
             const savedLang = localStorage.getItem('selected_lang') || 'fr';
@@ -513,7 +598,7 @@ Récolte,REC`;
             
             document.getElementById('setup-date').valueAsDate = new Date();
             initStadesDropdowns();
-            initCascadingSelects();
+            loadParcellesBDD(); // Charge Test + Custom CSV BDD
             restoreSetupChoices();
             renderRecapTable();
             
@@ -528,7 +613,6 @@ Récolte,REC`;
         }
 
         function initStadesDropdowns() {
-            // Remplir les listes déroulantes de la page : Seulement le CODE_STADE
             const selects = document.querySelectorAll('.stade-select');
             let options = '<option value="">--</option>';
             bddStades.forEach(s => {
@@ -536,10 +620,39 @@ Récolte,REC`;
             });
             selects.forEach(sel => sel.innerHTML = options);
 
-            // Remplir le tableau d'info de la modale cu toutes les infos
             const tbody = document.querySelector('#table-stades-info tbody');
             tbody.innerHTML = bddStades.map(s => `<tr><td>${s.Stade}</td><td><strong>${s.Code_Stade}</strong></td></tr>`).join('');
         }
+
+        // 🌟 FONCTION QUI MERGE LE TEST ET LE FICHIER CSV UPLOADÉ
+        function loadParcellesBDD() {
+            let combinedCSV = testParcelles;
+            let customBDD = localStorage.getItem('prod_custom_bdd_parcelles');
+            
+            if (customBDD) {
+                let customLines = customBDD.trim().split(/\r?\n/);
+                if(customLines.length > 1) {
+                    customLines.shift(); // Enlève la ligne d'en-tête pour fusionner proprement
+                    combinedCSV += "\n" + customLines.join("\n");
+                }
+            }
+            bddParcelles = parseCSV(combinedCSV);
+            initCascadingSelects();
+        }
+
+        // 🌟 LISTENER POUR CHARGER UN FICHIER DE PARCELLES DEPUIS L'ACCUEIL
+        document.getElementById('import-bdd-parcelles').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                const text = evt.target.result;
+                localStorage.setItem('prod_custom_bdd_parcelles', text);
+                loadParcellesBDD();
+                alert(getT('alert-bdd-loaded'));
+            };
+            reader.readAsText(file);
+        });
 
         /* --- Logique des listes déroulantes en cascade --- */
         function getUnique(key, filterFn = () => true) {
@@ -579,26 +692,9 @@ Récolte,REC`;
             populateSelect('setup-plot', getUnique('Field_ID', p => p.Country === c && p.Farmer === f && p.Variety === v), getT('choisir'));
         };
 
-        /* --- Restauration des choix précédents --- */
         function restoreSetupChoices() {
             const savedUser = localStorage.getItem('prod_setup_user');
             if(savedUser) document.getElementById('setup-user').value = savedUser;
-
-            const savedCountry = localStorage.getItem('prod_setup_country');
-            if(savedCountry) {
-                document.getElementById('setup-country').value = savedCountry;
-                filterFarms();
-                const savedFarmer = localStorage.getItem('prod_setup_farmer');
-                if(savedFarmer) {
-                    document.getElementById('setup-farmer').value = savedFarmer;
-                    filterVarieties();
-                    const savedVariety = localStorage.getItem('prod_setup_variety');
-                    if(savedVariety) {
-                        document.getElementById('setup-variety').value = savedVariety;
-                        filterPlots();
-                    }
-                }
-            }
         }
 
         /* --- Démarrage de la saisie --- */
@@ -613,29 +709,19 @@ Récolte,REC`;
                 return alert(getT('alert-user-plot'));
             }
 
-            // Sauvegarde des choix en LocalStorage
             localStorage.setItem('prod_setup_user', user);
-            localStorage.setItem('prod_setup_country', country);
-            localStorage.setItem('prod_setup_farmer', farmer);
-            localStorage.setItem('prod_setup_variety', variety);
 
-            // Récupérer la ligne de la parcelle
             currentPlotData = bddParcelles.find(p => p.Field_ID === plotId);
             
-            // Mettre à jour l'entête
             document.getElementById('recap-title').textContent = `${getT('th-parc')} : ${currentPlotData.Field_ID}`;
             document.getElementById('recap-subtitle').textContent = `${currentPlotData.Country} - ${currentPlotData.Farmer} - ${currentPlotData.Variety}`;
             
-            // Mettre à jour les labels de génétique
             document.getElementById('lbl-female').textContent = currentPlotData.Female || "Inconnu";
-            // Le CSV fourni n'a qu'un "Male". On l'applique à M1 et M2.
             document.getElementById('lbl-male1').textContent = currentPlotData.Male || "Inconnu";
             document.getElementById('lbl-male2').textContent = currentPlotData.Male || "Inconnu";
 
-            // Reset Form & Photos
             resetForm();
 
-            // Basculer l'affichage
             document.getElementById('session-setup').style.display = 'none';
             document.getElementById('app-container').style.display = 'block';
             document.getElementById('tab-btn-notations').click();
@@ -644,10 +730,9 @@ Récolte,REC`;
         window.changeParcelle = () => {
             document.getElementById('app-container').style.display = 'none';
             document.getElementById('session-setup').style.display = 'block';
-            document.getElementById('setup-plot').value = ""; // On force juste à rechoisir la parcelle
+            document.getElementById('setup-plot').value = ""; 
         };
 
-        /* --- Affichage des blocs Parentaux (Boutons individuels) --- */
         window.toggleParentBlock = (type) => {
             visibleParents[type] = !visibleParents[type];
             const btn = document.getElementById('btn-show-' + type);
@@ -676,7 +761,6 @@ Récolte,REC`;
            GESTION DES PHOTOS
            ========================================= */
         window.takePhoto = (type) => {
-            // L'attribut capture="environment" force le smartphone à ouvrir l'appareil photo
             document.getElementById('file-' + type.toLowerCase()).click();
         };
 
@@ -684,15 +768,13 @@ Récolte,REC`;
             const file = event.target.files[0];
             if (!file) return;
 
-            const dateStr = document.getElementById('setup-date').value.replace(/-/g, ''); // 20260309
+            const dateStr = document.getElementById('setup-date').value.replace(/-/g, ''); 
             const plotId = currentPlotData.Field_ID;
             const counter = photoCounters[type];
             
-            // Format : 1_20260309_M1_1.jpg (FieldID_Date_Type_Counter)
             const baseName = `${plotId}_${dateStr}_${type}_${counter}`;
             const filename = `${baseName}.jpg`;
 
-            // Téléchargement factice (pour sauvegarder localement sur l'appareil)
             const blobUrl = URL.createObjectURL(file);
             const link = document.createElement("a");
             link.href = blobUrl;
@@ -701,13 +783,9 @@ Récolte,REC`;
             link.click();
             document.body.removeChild(link);
 
-            // Stocker le nom de la photo pour l'export CSV
             currentPhotos.push(baseName);
-            
-            // Incrémenter le compteur
             photoCounters[type]++;
 
-            // Confirmer visuellement sur le bouton
             const btn = document.querySelector(`.notation-block.${type === 'F' ? 'female' : 'male'} .photo-btn`);
             btn.innerHTML = getT('photo-taken').replace('{n}', counter);
             btn.style.backgroundColor = "var(--theme-primary-color)";
@@ -729,7 +807,6 @@ Récolte,REC`;
             currentPhotos = [];
             photoCounters = { M1: 1, M2: 1, F: 1 };
             
-            // Masquer les blocs de parents par défaut à chaque nouvelle parcelle
             ['m1', 'm2', 'f'].forEach(t => {
                 visibleParents[t] = false;
                 const btn = document.getElementById('btn-show-' + t);
@@ -761,10 +838,9 @@ Récolte,REC`;
                 Com_M1: document.getElementById('com-m1').value,
                 Com_M2: document.getElementById('com-m2').value,
                 Com_Field: document.getElementById('com-field').value,
-                Photos: [...currentPhotos] // Copie de l'array
+                Photos: [...currentPhotos]
             };
 
-            // Ajouter les colonnes Pict_1 à Pict_11
             for(let i=1; i<=11; i++) {
                 obs[`Pict_${i}`] = obs.Photos[i-1] || "";
             }
@@ -774,7 +850,7 @@ Récolte,REC`;
             renderRecapTable();
             
             alert(getT('alert-save-success'));
-            changeParcelle(); // Retour automatique à l'écran de choix
+            changeParcelle(); 
         };
 
         function renderRecapTable() {
@@ -807,7 +883,6 @@ Récolte,REC`;
             const obsToEdit = observations.find(o => o.id === id);
             if(!obsToEdit) return;
 
-            // Replacer le contexte 
             document.getElementById('setup-country').value = obsToEdit.Country;
             filterFarms();
             document.getElementById('setup-farmer').value = obsToEdit.Farmer;
@@ -816,17 +891,14 @@ Récolte,REC`;
             filterPlots();
             document.getElementById('setup-plot').value = obsToEdit.Field_ID;
             
-            // Re-valider pour ouvrir la session
             document.getElementById('btn-start').click();
 
-            // Ouvrir les blocs si besoin
             ['m1', 'm2', 'f'].forEach(t => {
                 if (obsToEdit[`Stage_${t.toUpperCase()}`] || obsToEdit[`Com_${t.toUpperCase()}`]) {
                     toggleParentBlock(t);
                 }
             });
 
-            // Remplir les champs
             document.getElementById('stade-f').value = obsToEdit.Stage_F;
             document.getElementById('stade-m1').value = obsToEdit.Stage_M1;
             document.getElementById('stade-m2').value = obsToEdit.Stage_M2;
@@ -836,14 +908,13 @@ Récolte,REC`;
             document.getElementById('com-field').value = obsToEdit.Com_Field;
             currentPhotos = [...obsToEdit.Photos];
 
-            // Supprimer l'ancienne
             observations = observations.filter(o => o.id !== id);
             localStorage.setItem('prod_obs_v1', JSON.stringify(observations));
             renderRecapTable();
         };
 
         /* =========================================
-           IMPORT ANCIENNE VISITE & EXPORT CSV
+           IMPORT ANCIENNE VISITE & EXPORT CSV & PURGE
            ========================================= */
         document.getElementById('import-bdd').addEventListener('change', function(e) {
             const file = e.target.files[0];
@@ -868,34 +939,91 @@ Récolte,REC`;
             reader.readAsText(file);
         });
 
-        window.exportAndClear = () => {
-            if(observations.length === 0) return alert(getT('alert-no-export'));
-            
+        // 🌟 FONCTION UTILITAIRE POUR GENERER LE CSV
+        function getCSVString() {
             const cols = ["Year","Country","Field_ID","Farmer","Variety","Female","Male","User","Date_obs","Stage_F","Stage_M1","Stage_M2","Com_F","Com_M1","Com_M2","Com_Field","Pict_1","Pict_2","Pict_3","Pict_4","Pict_5","Pict_6","Pict_7","Pict_8","Pict_9","Pict_10","Pict_11"];
-            
             let csv = cols.join(",") + "\n";
             observations.forEach(o => {
                 csv += cols.map(c => {
                     let val = o[c] || "";
-                    // Échapper les guillemets et virgules pour un CSV propre
                     if(val.includes(',')) val = `"${val}"`;
                     return val;
                 }).join(",") + "\n";
             });
+            return csv;
+        }
 
+        // 🌟 BOUTON 1 : EXPORT LOCAL (SECOURS)
+        window.exportLocalCSV = () => {
+            if(observations.length === 0) return alert(getT('alert-no-export'));
             const dateStr = document.getElementById('setup-date').value;
             const filename = `Export_${dateStr}.csv`;
-            
             const a = document.createElement('a');
-            a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'}));
+            a.href = URL.createObjectURL(new Blob([getCSVString()], {type: 'text/csv;charset=utf-8'}));
             a.download = filename;
             a.click();
+        };
 
-            if(confirm(getT('alert-export-success'))) {
+        // 🌟 BOUTON 2 : EXPORT GOOGLE DRIVE
+        window.exportToDrive = async () => {
+            if(observations.length === 0) return alert(getT('alert-no-export'));
+            
+            // Si l'utilisateur est sur l'app directement hébergée par Google Apps Script
+            if (typeof google !== 'undefined' && google.script && google.script.run) {
+                document.getElementById('btn-drive-export').innerHTML = getT('exporting');
+                const dateStr = document.getElementById('setup-date').value;
+                const filename = `Export_App_${dateStr}.csv`;
+                
+                google.script.run
+                    .withSuccessHandler((url) => {
+                        document.getElementById('btn-drive-export').innerHTML = getT('btn-export-drive');
+                        alert(getT('alert-drive-success') + " " + url);
+                    })
+                    .withFailureHandler((err) => {
+                        document.getElementById('btn-drive-export').innerHTML = getT('btn-export-drive');
+                        alert(getT('alert-drive-error') + " " + err);
+                    })
+                    .saveFileToDrive(getCSVString(), filename);
+            } else {
+                // Si l'utilisateur a hébergé son code sur GitHub et utilise le WebApp URL (API)
+                if(WEB_APP_URL === "URL_DE_TON_APPS_SCRIPT_A_REMPLACER") {
+                    alert("⚠️ L'URL de Google Apps Script n'est pas configurée dans le code. Le téléchargement local va se lancer en secours.");
+                    return exportLocalCSV();
+                }
+
+                document.getElementById('btn-drive-export').innerHTML = getT('exporting');
+                const filename = `Export_App_${document.getElementById('setup-date').value}.csv`;
+                const payload = { csv: getCSVString(), filename: filename };
+                
+                try {
+                    const response = await fetch(WEB_APP_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                        body: JSON.stringify(payload),
+                        redirect: 'follow'
+                    });
+                    const result = await response.json();
+                    if(result.status === "success") {
+                        alert(getT('alert-drive-success'));
+                    } else {
+                        alert(getT('alert-drive-error') + " " + result.message);
+                    }
+                } catch(e) {
+                    alert(getT('alert-drive-error') + " (Avez-vous retrouvé le réseau Internet ?)");
+                }
+                document.getElementById('btn-drive-export').innerHTML = getT('btn-export-drive');
+            }
+        };
+
+        // 🌟 BOUTON 3 : PURGE
+        window.purgeData = () => {
+            if(confirm(getT('alert-purge-confirm'))) {
                 observations = [];
                 localStorage.removeItem('prod_obs_v1');
+                localStorage.removeItem('prod_custom_bdd_parcelles'); // On efface aussi la BDD chargée
                 renderRecapTable();
-                alert(getT('alert-purged'));
+                loadParcellesBDD(); // Recharge pour ne garder que les 3 tests de base
+                alert(getT('alert-purged-success'));
             }
         };
 
